@@ -24,7 +24,6 @@ const GetNextPart=  async (
             return {id : doc.id , ...doc.data()}
         })
         setDocs(data);
-        console.log(docs)
         if (currentIndex === -1) return null;
 
         const nextDoc = docs[currentIndex + 1];
@@ -46,6 +45,7 @@ const ReadStory = () => {
     const [docs , setDocs] = useState<firebase.firestore.DocumentData[]>([])
     const [storyData , setStoryData] = useState<firebase.firestore.DocumentData>([])
     const navigate = useNavigate()
+    
     useEffect(() => {
         async function FetchPart(){
             try{

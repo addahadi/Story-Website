@@ -64,6 +64,29 @@ export interface PopupProp<T> extends React.HTMLAttributes<HTMLDivElement>{
   open : T
 }
 
+export interface GeneratePlotDialogProps {
+  selectedText: string;
+  isopen: boolean;
+  setIsopen: React.Dispatch<React.SetStateAction<boolean>>;
+  setData :  React.Dispatch<React.SetStateAction<string[]>>
+}
+
+
+export interface attributesProps{
+  bold? : boolean 
+  italic?: boolean
+  underline? : boolean
+  header?:number 
+  color: string
+}
+
+export interface quillDataProps {
+  insert : string
+  attributes : attributesProps
+}
+
+
+
 
 export interface DetailsProp {
   likes : number

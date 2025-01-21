@@ -1,3 +1,4 @@
+import { attributesProps } from "./type";
 
 export const LeftSideCom = [
     {
@@ -132,3 +133,19 @@ export const cards = [
 ];
 
 export const  currentpage = ["Write" ,"Home", "Discover" , "Profile"]
+
+
+
+function handleAttributes(attributes : attributesProps){
+  let style = ""
+  if(attributes.hasOwnProperty("bold")) style += " font-semibold "
+  if(attributes.hasOwnProperty("header")) style += ` text-[${attributes.header}rem] `;
+  if(attributes.hasOwnProperty("italic")) style += " italic"
+  if(attributes.hasOwnProperty("underline")) style +=" underline "
+  if(attributes.hasOwnProperty("color")) style += ` text-[${attributes.color}] `
+  console.log(style)
+  return style
+}
+
+
+export default handleAttributes

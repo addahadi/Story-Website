@@ -1,93 +1,59 @@
-
-import EditorJS, { OutputBlockData } from "@editorjs/editorjs";
-import { useRef, useState } from "react";
-import { useEffect } from "react";
-import ImageTool from "@editorjs/image";
-import { EditorProps } from "@/utils/type";
-import { ApiController } from "@/utils/CloudConfig";
+import React, { useCallback, useEffect, useState } from "react";
+import Quill from "quill"
+import "quill/dist/quill.snow.css";
 
 
-const Editor = ({setTitle,Issave,setData, setWord}: EditorProps) => {
-  
-  const [textData, setTextData] = useState<OutputBlockData<string, any>[]>([]);
-  const EditorRef = useRef<EditorJS | null>(null);  
+const toolbarOptions = [
+  [{ font: [] }],
+  [{ size: ["large", "huge"] }],
+  [{ header: [1, 2, 3, false] }],
+
+  ["bold", "italic", "underline"],
+  [{ color: [] }, { background: [] }],
+
+  [{ script: "sub" }, { script: "super" }],
+  [{ list: "ordered" }, { list: "bullet" }],
+
+  ["image"],
+];
+
+
+
+
+
+const Editor = ({
+  issave , setData
+} : {issave : boolean , setData : React.Dispatch<React.SetStateAction<{}>>}) => {
+  const [quill , setQuill] = useState<Quill | undefined>();
+
+
+
   useEffect(() => {
-    EditorRef.current = new EditorJS({
-      holder: "editorjs",
-      tools: {
-        image: {
-          class: ImageTool,
-          config: {
-            uploader: {
-              uploadByFile: ApiController().UploadImg,
-            },
-          },
-        },
-      },
+    if(!quill) return;
+    const data = quill.getContents();
+    setData(data.ops);
+    console.log(data.ops)
+  },[issave])
 
-      //@ts-ignore
-      data: textData,
-      onChange: async () => {
-        if (!EditorRef.current) return;
-        const content = await EditorRef.current.save();
-        setTextData(content.blocks);
-        const count = countWords(content.blocks);
-        setWord(count);
-      },
-    });
-  }, []);
 
-  const countWords = (blocks:any) => {
-    let text = "";
 
-    blocks.forEach((block:any) => {
-      if (block.type === "paragraph" || block.type === "header") {
-        text += block.data.text + " ";
-      } else if (block.type === "list") {
-        block.data.items.forEach((item:any) => {
-          text += item + " "; 
-        });
-      }
-    });
-
-    return text
-      .trim()
-      .split(/\s+/)
-      .filter((word) => word !== "").length;
-  };
 
   
-  useEffect(() => {
-    async function SaveSession(){
-      if(!EditorRef.current?.save()){
-        return
-      }
-      await EditorRef.current.save().then((Data) => {
-        setData(Data.blocks);
+  const WrapperRef = useCallback((wrapper : HTMLDivElement) => {
+    if(wrapper == null) return 
+    if(!wrapper) return 
+    wrapper.innerHTML = "";
 
-      }).catch((error) => {
-        console.log(error)
-      })
-    }
-    if(Issave){
-      SaveSession()
-    }
-  },[Issave])
-  return (
-    <div>
-      <textarea
-      onChange={(e) => setTitle(e.target.value)}
-      className="resize-none outline-none border-b-2  text-3xl w-full max-h-fit box-border pb-0 leading-none"
-      placeholder="Title"
+    const editor = document.createElement("div")
+    editor.id = "editor"
 
-      />
-      <div style={{ position: "relative" }} className=" w-full h-12">
-        {/* This is where Editor.js will render */}
-        <div id="editorjs" className=" mt-5 w-full h-full text-xl"></div>
-      </div>
-
-    </div>
-  );
+    wrapper.appendChild(editor)
+    const q = new Quill("#editor" , {modules : {
+      toolbar : toolbarOptions
+    } , theme : "snow"})
+    setQuill(q);
+  },[])
+  return <div id="container" ref={WrapperRef} className=" w-full min-h-[500px]"></div>;
 };
 
-export default Editor
+export default Editor;
