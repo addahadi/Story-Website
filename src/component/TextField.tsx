@@ -24,9 +24,9 @@ const TextField = ({Data} : {Data: firebase.firestore.DocumentData | undefined})
                     style = handleAttributes(data.attributes);   
                 }
                 return (
-                    <span className={`${style}`}>
+                    <div className={`${style}`}>
                         {data.insert}
-                    </span>
+                    </div>
                 )
             })}
         </div>

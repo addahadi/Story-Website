@@ -7,18 +7,6 @@
   }
 }
 
-
-.content-editable[contenteditable="true"]:empty::before {
-  content: "Title";
-  color: #aaa;
-  cursor: text;
-}
-
-.content-editable[contenteditable="true"]:focus::before {
-  content: ""; /* Hide placeholder when focused */
-}
-
-
 .templateImg{
   background-image: url("../public/templateImg.jpeg");
 }
@@ -46,15 +34,20 @@ body{
   background-color: #fff;
   border-top: 4px solid #242424;
   font-size: large;
+  font-family: "Noto Sans", serif;
   line-height: 25px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  width: 100%;
 }
 .ql-editor {
   line-height: 40px;
   border-top: 1px solid #ccc;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 .ql-formats{
     font-family: "Noto Sans", serif;

@@ -17,27 +17,28 @@ const About = () => {
 
 
     return (
-        <div className=" flex-1 flex flex-col gap-12">
+        <div className=" flex-1 flex flex-col gap-12 ">
             {Data.map((item, index) => {
                 const truncatedStr = item.desc.length > 100 ? item.desc.slice(0, 150) + "..." : item.desc
                 return (
-                  <div key={index} className=" w-full p-4 bg-[#dcdcdd]">
+                  <div key={index} className=" w-full px-4 py-6 overflow-hidden bg-white-3 flex flex-row gap-4 items-center">
+                    <img src={item.ImgUrl} width={150}  className=" rounded-md h-full"/>
                     <div className="flex flex-col gap-3 ">
                       <h1 className="text-lg font-bold text-black-2">
                         {item.title}
                       </h1>
-                      <p className=" text-white-2 leading-8 w-[600px]">
+                      <p className=" text-black-2 leading-6 w-[600px]">
                         {truncatedStr}
                       </p>
-                    </div>
-                    <div className="mt-6 flex flex-wrap w-fit">
-                      {item.tag.map((value: string) => {
-                        return (
-                          <span className="inline-block  bg-orange-2  text-black-2 rounded-full px-3 py-1 text-sm mr-2 mb-2">
-                            {value}
-                          </span>
-                        );
-                      })}
+                      <div className="mt-2 flex flex-wrap w-fit">
+                        {item.tag.map((value: string) => {
+                          return (
+                            <span className="inline-block  bg-orange-2 border border-black-2  text-black-2 rounded-full px-3 py-1 text-sm mr-2 mb-2">
+                              {value}
+                            </span>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 );

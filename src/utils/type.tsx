@@ -2,6 +2,7 @@ import { User } from "firebase/auth/web-extension";
 import React, { ReactNode } from "react";
 import { NavigateFunction } from "react-router-dom";
 import firebase from "firebase/compat/app";
+import { Op } from "quill";
 export type UserType = User | null
 
 
@@ -11,7 +12,7 @@ export interface UserContextType{
 }
 
 
-export interface EditorProps {
+export interface EditorProp {
   Issave: boolean;
   setTitle: React.Dispatch<React.SetStateAction<string | TrustedHTML>>;
   setData: React.Dispatch<React.SetStateAction<{}>>;
@@ -87,7 +88,6 @@ export interface quillDataProps {
 
 
 
-
 export interface DetailsProp {
   likes : number
   id? : string
@@ -99,6 +99,15 @@ export interface DetailsProp {
   title : string
   ImgUrl:string
 }
+
+type data  =  Op[]
+
+export interface EditorProps extends Pick<EditorProp , "setWord"> {
+  issave : boolean;
+  setIssave : React.Dispatch<React.SetStateAction<boolean>>;
+  setdata : React.Dispatch<React.SetStateAction<data>>; 
+}
+
 export interface TextDataProps  {
   data: Record<string, string>
   type: string

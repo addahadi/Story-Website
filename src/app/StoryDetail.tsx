@@ -4,15 +4,14 @@ import { useStory } from "@/context/StoryCon";
 import { useUser } from "@/context/UserCon";
 
 import { useError } from "@/hooks/useError";
-import { db } from "@/utils/firebase";
+import { db } from "@/utils/FirebaseConfig";
 import { UploadDetailsProp } from "@/utils/type";
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // @ts-ignore
-import Loading from 'react-simple-loading';
+import Loading from "react-simple-loading";
 import firebase from "firebase/compat/app";
 import Timestamp = firebase.firestore.Timestamp;
-
 
 const UploadDetails = async ({
   currentUser,
@@ -23,63 +22,65 @@ const UploadDetails = async ({
 }: UploadDetailsProp) => {
   if (currentUser?.email) {
     try {
-      const podcastID = db
-        .collection("WrittenStories")
-        .doc().id;
+      const podcastID = db.collection("WrittenStories").doc().id;
       setLoading(true);
-      await db
-        .collection("WrittenStories")
-        .doc(podcastID)
-        .set({
-          title: Details.title,
-          desc: Details.desc,
-          category: Details.category,
-          character: Details.character,
-          tag: Details.tag,
-          ImgUrl: Details.ImgUrl,
-          author : currentUser.uid,
-          likes : 0,
-          time : Timestamp.now()
-        });
+      await db.collection("WrittenStories").doc(podcastID).set({
+        title: Details.title,
+        desc: Details.desc,
+        category: Details.category,
+        character: Details.character,
+        tag: Details.tag,
+        ImgUrl: Details.ImgUrl,
+        author: currentUser.uid,
+        likes: 0,
+        time: Timestamp.now(),
+      });
 
       setStoryId(podcastID);
       navigate(`/session/${podcastID}`);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
   }
 };
 
-
-
 const StoryDetail = () => {
-  
-  const {title , setTitle , desc , setDesc , category , setCategory,
-    character , tag , error , Error, handleError
-  } = useError()
+  const {
+    title,
+    setTitle,
+    desc,
+    setDesc,
+    category,
+    setCategory,
+    character,
+    tag,
+    error,
+    Error,
+    handleError,
+  } = useError();
 
-  const [loading , setLoading] = useState(false);
-  const [ImgUrl , setImgUrl] = useState('');
-  const {currentUser} = useUser()
-  const {setStoryId} = useStory()
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const [ImgUrl, setImgUrl] = useState("");
+  const { currentUser } = useUser();
+  const { setStoryId } = useStory();
+  const navigate = useNavigate();
 
   const Details = {
-    title : title,
-    desc : desc,
-    category : category,
-    character : character.itemList,
-    tag : tag.itemList,
-    ImgUrl : ImgUrl,
-  }
+    title: title,
+    desc: desc,
+    category: category,
+    character: character.itemList,
+    tag: tag.itemList,
+    ImgUrl: ImgUrl,
+  };
 
-  async function handleClick(){
-    handleError()
-    if(error){
-      console.log("yes")
-      UploadDetails({currentUser , setLoading , setStoryId  , Details , navigate});
+  async function handleClick() {
+    handleError();
+    if (error) {
+      console.log("yes");
+      UploadDetails({ currentUser, setLoading, setStoryId, Details, navigate });
     }
   }
 
@@ -87,21 +88,17 @@ const StoryDetail = () => {
     <div>
       <div className="flex flex-row w-full h-fit absolute left-0">
         <div className=" flex justify-center items-center bg-orange-300">
-          <img
-            src="../public/writeS.webp"
-            width={500}
-            className="h-full"
-            />
+          <img src="../public/writeS.webp" width={500} className="h-full" />
         </div>
         <div className=" flex-1 pt-5 px-4 h-full   w-2/5 relative">
           <div className=" pb-5 border-orange-1 border-b-[6px] w-fit">
-            <h1 className=" text-xl font-medium  text-black-2">Story Details</h1>
+            <h1 className=" text-xl font-medium  text-black-2">
+              Story Details
+            </h1>
           </div>
-          <div className=" w-full h-[0.5px] bg-white-4 absolute left-0">
-
-          </div>
+          <div className=" w-full h-[0.5px] bg-white-4 absolute left-0"></div>
           <div className=" w-full p-5 flex flex-col gap-6">
-            <CoverImageUpload setImgUrl = {setImgUrl}/>
+            <CoverImageUpload setImgUrl={setImgUrl} />
             <div className="flex flex-col gap-1">
               <label className="block font-semibold mb-1 text-lg">Title</label>
               <input
@@ -141,7 +138,7 @@ const StoryDetail = () => {
                   className="bg-gray-200 p-2 rounded hover:bg-gray-300"
                   onClick={() => {
                     character.addItem();
-                    console.log(character.itemList)
+                    console.log(character.itemList);
                   }}
                 >
                   +
@@ -162,7 +159,11 @@ const StoryDetail = () => {
               <label className="block font-semibold mb-1 text-lg">
                 Category
               </label>
-              <select className="w-full border border-gray-300 rounded p-2" value={category} onChange={(e) => setCategory(e.target.value)}>
+              <select
+                className="w-full border border-gray-300 rounded p-2"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
                 <option value="">Select a category</option>
                 <option value="Fantasy">Fantasy</option>
                 <option value="Adventure">Adventure</option>
@@ -198,16 +199,19 @@ const StoryDetail = () => {
                   );
                 })}
               </div>
-          </div>
-            <Button className=" font-light text-lg  bg-orange-1" onClick={handleClick}>
-                {loading ? <Loading  size={"20px"}  /> : <span>Save</span>}
+            </div>
+            <Button
+              className=" font-light text-lg  bg-orange-1"
+              onClick={handleClick}
+            >
+              {loading ? <Loading size={"20px"} /> : <span>Save</span>}
             </Button>
           </div>
         </div>
       </div>
-      <Error/>
+      <Error />
     </div>
   );
-}
+};
 
-export default StoryDetail
+export default StoryDetail;

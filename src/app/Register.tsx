@@ -1,16 +1,18 @@
-import { Auth, provider } from "@/utils/firebase";
+import { Auth, provider } from "@/utils/FirebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   async function handleSignIn() {
-   signInWithPopup(Auth,provider).then(()=>{
-    navigate("/")
-   }).catch((error)=>{
-    console.log(error)
-   })
+    signInWithPopup(Auth, provider)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-  
+
   return (
     <div className="flex justify-center items-center  h-screen">
       <div className="flex flex-col h-96 min-w-96 justify-center items-center bg-black-4">
@@ -38,6 +40,6 @@ const Register = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Register
+export default Register;

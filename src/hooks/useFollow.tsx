@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { db } from "@/utils/firebase.tsx";
+import { db } from "@/utils/FirebaseConfig";
 import { UserType } from "@/utils/type.tsx";
 import { toast } from "./use-toast";
 
 const useFollow = (profileId: string | undefined, currentUser: UserType) => {
   const [isFollow, setIsFollow] = useState(false);
-  
+
   const [isProcessing, setIsProcessing] = useState(false);
   useEffect(() => {
     async function fetchFollowStatus() {
@@ -29,7 +29,7 @@ const useFollow = (profileId: string | undefined, currentUser: UserType) => {
     fetchFollowStatus();
   }, [profileId, currentUser]);
 
-async function toggleFollow() {
+  async function toggleFollow() {
     if (!currentUser || !profileId) return;
     if (currentUser.uid === profileId) {
       console.warn("You cannot follow yourself.");
@@ -55,12 +55,12 @@ async function toggleFollow() {
           .collection("Following")
           .doc(profileId)
           .delete();
-           
+
         toast({
-          title:"Unfollow",
-          description:`You unfollowed ${currentUser?.email?.split('@')[0]}`,
-          variant:"destructive"
-        })
+          title: "Unfollow",
+          description: `You unfollowed ${currentUser?.email?.split("@")[0]}`,
+          variant: "destructive",
+        });
         setIsFollow(false);
       } else {
         // Follow
@@ -77,10 +77,10 @@ async function toggleFollow() {
           .doc(profileId)
           .set({ followedAt: new Date() });
         toast({
-            title: "Follow",
-            description: `You followed ${currentUser?.email?.split("@")[0]}`,
-            variant: "destructive",
-          });
+          title: "Follow",
+          description: `You followed ${currentUser?.email?.split("@")[0]}`,
+          variant: "destructive",
+        });
         setIsFollow(true);
       }
     } catch (err) {
