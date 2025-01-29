@@ -13,7 +13,6 @@ const Suggestions = ({
   setSelectedText: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const TextRef = useRef<HTMLParagraphElement>(null)
-  const AiTextRef = useRef<HTMLDivElement>(null)
   const [isopen , setIsopen] = useState(false);
   const [data , setData] = useState<string[]>([]);
   const [isclose , setIsclose] = useState(true);
@@ -24,7 +23,7 @@ const Suggestions = ({
     if(!slcTxt){
       toast({
         title:"Select Text",
-        description:"You need to select a text or a paragraphe"
+        description:"You need to select a text or a paragraph"
       })
       return 
     }
@@ -34,14 +33,11 @@ const Suggestions = ({
 
   
   function Delete(){
-    if(AiTextRef?.current){
-      AiTextRef.current.innerHTML = "";
       setData([]);
-    }
   }
 
   function CloseOpen(){
-    setIsclose(!isclose)
+    setIsclose(!isclose);
   }
 
   function CopyText(){
@@ -80,7 +76,7 @@ const Suggestions = ({
             <span className="text-lg font-semibold text-black-2 ">History</span> : "" }
         {isclose ?
             <div
-              className=" p-2 rounded-full cursor-pointer hover:bg-orange-1 transition-colors"
+              className=" p-2 rounded-full cursor-pointer hover:border hover:bg-orange-2 hover:border-orange-1 transition-colors"
               onClick={Delete}
             >
               <img src="../public/delete.svg" width="20px" />
@@ -89,15 +85,17 @@ const Suggestions = ({
       </div>
       {isclose ?
       <div
-        className=" px-2 flex-1  overflow-auto flex flex-col gap-4 justify-center items-center"
-        ref={AiTextRef}
+        className={cn("px-2 flex-1  overflow-auto flex flex-col gap-4",
+            {" justify-center items-center": isclose}
+        )}
       >
         {data.length > 0 ? data.map((value) => {
+          console.log(value);
               return (
                 <div className=" bg-white-3 px-4 py-3 rounded-lg flex flex-col gap-3">
                   <div className=" w-full flex flex-row justify-end">
                     <div
-                      className=" p-2 rounded-full w-fit hover:bg-orange-1  cursor-pointer"
+                      className=" p-2 rounded-full w-fit hover:bg-orange-2 hover:border hover:border-orange-1  cursor-pointer transition-colors"
                       onClick={CopyText}
                     >
                       <img src="../public/copy.svg" width="20px" />

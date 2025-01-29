@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import ProfileImg from "./ProfileImg";
 import { Timestamp } from 'firebase/firestore';
 import { useNavigate } from "react-router-dom";
-import { MarkAsRead } from "@/utils/Notification";
+import {MarkAllAsRead, MarkAsRead} from "@/utils/Notification";
 import { useUser } from "@/context/UserCon";
+import {Icon} from "@/component/Icon.tsx";
 
 
 
@@ -40,7 +41,12 @@ const NotificationComp = ({
     <Dialog open={clicked} onOpenChange={setClicked}>
       <DialogContent className="absolute top-10 z-50 bg-white-1 right-0 shadow-custom-equal rounded-md ">
         <DialogTitle className=" p-3 border-b border-black-2 ">
-          Notification
+          <div>
+            Notification
+          </div>
+          <div onClick={() => MarkAllAsRead(currentUser)}>
+            <img src="../public/delete.svg"  width={20}/>
+          </div>
         </DialogTitle>
         <DialogDescription className=" p-3 w-[450px]">
           {notifications?.map((not) => {

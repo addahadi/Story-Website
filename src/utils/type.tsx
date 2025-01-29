@@ -60,6 +60,14 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export type PartCom = Array<firebase.firestore.DocumentData | undefined>
 
 
+
+
+export interface GenreProps {
+  genre : string,
+  color : string
+}
+
+
 export interface PopupProp<T> extends React.HTMLAttributes<HTMLDivElement>{
   children : ReactNode;
   open : T

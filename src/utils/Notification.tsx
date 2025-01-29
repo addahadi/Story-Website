@@ -78,6 +78,28 @@ export function UnReadNotifcation(
   return unsubscribe;
 }
 
+export async  function MarkAllAsRead(currentUser : UserType){
+  const notificationRef = db
+      .collection("user")
+      .doc(currentUser?.uid)
+      .collection("Notification");
+  try  {
+    const snapshot = await notificationRef.where("read","==", false).get()
+    if (snapshot.empty) return;
+
+    for (const docSnap of snapshot.docs) {
+      await notificationRef.doc(docSnap.id).update({ isRead: true });
+    }
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+
+
+
+
+
 export async function MarkAsRead(
   currentUser: UserType,
   notificationId: string

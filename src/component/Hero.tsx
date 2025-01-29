@@ -19,7 +19,7 @@ const Hero = () => {
         <div className="flex flex-col gap-3">
           <h1 className=" text-4xl ">Your Stories</h1>
           <p className=" text-lg  text-white-2 ">
-            Feel free to add more stories
+            your latest stories
           </p>
         </div>
         <div className="flex flex-row gap-1 flex-wrap h-fit px-4">
@@ -35,16 +35,19 @@ const Hero = () => {
             <Icon.plus Color={color} classes="w-[100px]" />
           </Card>
           {Data.map((value, index) => {
-            const { title } = value;
-            const truncatedStr =
-              title.length > 30 ? title.slice(0, 30) + "..." : title;
-            return (
-              <StoryCard
-                key={index}
-                items={value as DetailsProp}
-                truncatedStr={truncatedStr}
-              />
-            );
+              if(index < 3){
+                const { title } = value;
+                const truncatedStr =
+                  title.length > 30 ? title.slice(0, 30) + "..." : title;
+
+                return (
+                  <StoryCard
+                    key={index}
+                    items={value as DetailsProp}
+                    truncatedStr={truncatedStr}
+                  />
+                );
+              }
           })}
         </div>
       </div>

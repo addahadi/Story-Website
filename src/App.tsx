@@ -13,6 +13,8 @@ import { StoryProvider } from './context/StoryCon';
 import ReadStory from "@/app/ReadStory.tsx";
 import About from "@/app/About.tsx";
 import Home from "@/app/Home.tsx";
+import Browse from "@/app/Browse.tsx";
+import Category from "@/app/Category.tsx";
 
 
 function App() {
@@ -21,6 +23,16 @@ function App() {
     <StoryProvider>
       <UserProvider>
         <Routes>
+            <Route path="/browse" element = {
+                <LayouT>
+                    <Browse />
+                </LayouT>
+            }/>
+            <Route path="/category/:categoryId" element={
+                <LayouT>
+                    <Category/>
+                </LayouT>
+            }/>
           <Route
             path="/"
             element={

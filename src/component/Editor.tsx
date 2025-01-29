@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Quill, { Op } from "quill"
+import { useCallback, useEffect, useState } from "react";
+import Quill from "quill"
 import "quill/dist/quill.snow.css";
 import { EditorProps } from "@/utils/type";
+import {ApiController} from "@/utils/CloudConfig.tsx";
 
 
 const toolbarOptions = [
@@ -18,16 +19,10 @@ const toolbarOptions = [
   ["image"],
 ];
 
-
-
-
-
 const Editor = ({
   issave , setdata , setIssave , setWord
 } : EditorProps) => {
-  const [quill , setQuill] = useState<Quill | undefined>();
-
-
+  const [quill , setQuill] = useState<Quill | undefined>()
 
   useEffect(() => {
     if(!quill) return;
@@ -35,7 +30,8 @@ const Editor = ({
     const data = quill.getContents();
     setdata(data.ops);
     setIssave(false);
-  },[issave])
+
+  },[issave]);
 
 
   
@@ -50,7 +46,28 @@ const Editor = ({
     
     wrapper.appendChild(editor)
     const q = new Quill("#editor" , {modules : {
-      toolbar : toolbarOptions
+      toolbar : {
+        container : toolbarOptions,
+        handlers : {
+          image : function () {
+            const Fileinput = document.createElement("input");
+            Fileinput.setAttribute("type" , "file");
+            Fileinput.setAttribute("accept" , "image/*");
+            Fileinput.click();
+            Fileinput.onchange =  async () => {
+              const file = Fileinput?.files?.[0];
+              if(file){
+                const formData = new FormData();
+                formData.append("file",file);
+                const result  = await ApiController().UploadImg(formData);
+                const range = this.quill.getSelection();
+                console.log(range);
+                if(range) this.quill.insertEmbed(range.index, 'image', result.url);
+              }
+            }
+          },
+        }
+      }
     } , theme : "snow"})
     setQuill(q);
   },[])

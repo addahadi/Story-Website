@@ -132,6 +132,35 @@ export const cards = [
   },
 ];
 
+
+export const genreColors = [
+  { genre: "Fantasy", color: "#D8BFD8" }, // Thistle (soft purple with a magical vibe)
+  { genre: "Comedy", color: "#FFF8DC" }, // Cornsilk (cheerful light yellow)
+  { genre: "Adventure", color: "#C1E1C1" }, // Light Green (fresh and vibrant)
+  { genre: "Mystery", color: "#D1D9E6" }, // Light Steel Blue (calm and mysterious)
+  { genre: "Sci-Fi", color: "#B4DDED" }, // Light Cyan (clean and futuristic)
+  { genre: "Romance", color: "#FADADD" }, // Light Pink (romantic and warm)
+  { genre: "Horror", color: "#F4CCCC" }, // Light Coral (soft reddish tone)
+  { genre: "Historical", color: "#F5DEB3" }, // Wheat (timeless and elegant)
+  { genre: "Thriller", color: "#C8D6E5" }, // Light Slate Gray (tense and clean)
+  { genre: "Poetry", color: "#E3F2FD" } // Baby Blue (calm and ethereal)
+];
+
+
+export function getTextColor(backgroundColor : string) {
+
+  const rgb = parseInt(backgroundColor.slice(1), 16);
+  const r = (rgb >> 16) & 0xff;
+  const g = (rgb >> 8) & 0xff;
+  const b = rgb & 0xff;
+
+
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+
+  return brightness > 180 ? "#333333" : "#FFFFFF";
+}
+
 export const  currentpage = ["Write" ,"Home", "Discover" , "Profile"]
 
 

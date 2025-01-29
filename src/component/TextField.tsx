@@ -23,6 +23,11 @@ const TextField = ({Data} : {Data: firebase.firestore.DocumentData | undefined})
                 if(data.hasOwnProperty("attributes")){
                     style = handleAttributes(data.attributes);   
                 }
+                if(typeof data.insert === "object"){
+                   return <div className="flex border-2 border-black-2 rounded-md mt-4 mb-4 justify-center items-center h-fit py-6">
+                       <img src={data.insert.image}  width={400} alt="img" className=" rounded-md"/>
+                   </div>;
+                }
                 return (
                     <div className={`${style}`}>
                         {data.insert}

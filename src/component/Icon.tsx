@@ -110,7 +110,7 @@ const Plus = ({Color , classes} : {Color:string , classes : string}) => {
 
 const Arrow = ({direction , CloseOpen} : {direction : string , CloseOpen : () => void}) => {
   return (
-    <div className=" w-[40px] cursor-pointer p-2 rounded-full hover:bg-orange-1 transition-colors" onClick={CloseOpen}  >
+    <div className=" w-[40px] cursor-pointer p-2 rounded-full hover:bg-orange-2 hover:border hover:border-orange-1  transition-colors" onClick={CloseOpen}  >
       {direction == "right" ? (
         <svg
           viewBox="-3 0 32 32"

@@ -4,11 +4,16 @@ export const ApiController = () => {
           "upload_preset",
           import.meta.env.VITE_CLOUDINARY_PRESET
         );
-        const data = await fetch(import.meta.env.VITE_CLOUDINARY_URL, {
-          method: "POST",
-          body: formData,
-        }).then((r) => r.json());
-        return data;
+        try {
+          const data = await fetch(import.meta.env.VITE_CLOUDINARY_URL, {
+              method: "POST",
+              body: formData,
+           }).then((r) => r.json());
+           return data;
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
     return {
         UploadImg

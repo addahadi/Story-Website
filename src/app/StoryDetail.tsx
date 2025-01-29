@@ -35,9 +35,9 @@ const UploadDetails = async ({
         likes: 0,
         time: Timestamp.now(),
       });
-
       setStoryId(podcastID);
       navigate(`/session/${podcastID}`);
+
     } catch (error) {
       console.log(error);
     } finally {
@@ -79,8 +79,7 @@ const StoryDetail = () => {
   async function handleClick() {
     handleError();
     if (error) {
-      console.log("yes");
-      UploadDetails({ currentUser, setLoading, setStoryId, Details, navigate });
+      await UploadDetails({ currentUser, setLoading, setStoryId, Details, navigate });
     }
   }
 
@@ -160,14 +159,21 @@ const StoryDetail = () => {
                 Category
               </label>
               <select
-                className="w-full border border-gray-300 rounded p-2"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                  className="w-full border border-gray-300 rounded p-2"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">Select a category</option>
-                <option value="Fantasy">Fantasy</option>
-                <option value="Adventure">Adventure</option>
-                <option value="Romance">Romance</option>
+                <option value="fantasy">fantasy</option>
+                <option value="adventure">adventure</option>
+                <option value="romance">romance</option>
+                <option value="comedy">comedy</option>
+                <option value="mystery">mystery</option>
+                <option value="sci-fi">sci-fi</option>
+                <option value="horror">horror</option>
+                <option value="thriller">thirller</option>
+                <option value="poetry">poetry</option>
+
               </select>
             </div>
 

@@ -22,7 +22,7 @@ const buttonVariants = cva(
         outlineR:
           " rounded-full border-2 border-black-2 bg-white hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
         follow:
-          " rounded-full bg-orange-1 text-neutral-50 hover:bg-orange-2 hover:text-black-2 hover:border-2 hover:border-orange-1",
+          " border border-orange-1 rounded-full bg-orange-1 text-neutral-50 hover:bg-orange-2 hover:text-black-2 hover:border-2 hover:border-orange-1",
         outFollow:
           "rounded-full hover:bg-orange-1 hover:text-neutral-50 bg-orange-2 text-black-2 border-2 border-orange-1",
       },
