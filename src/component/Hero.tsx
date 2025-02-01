@@ -4,7 +4,7 @@ import useFetch from "@/hooks/FetchProfileStr.tsx";
 import StoryCard from "@/component/StoryCard.tsx";
 import {DetailsProp} from "@/utils/type.tsx";
 import {useNavigate} from "react-router-dom";
-import { Icon } from "./Icon";
+import { Icon } from "./ui/Icon.tsx";
 import { useState } from "react";
 
 
@@ -42,7 +42,7 @@ const Hero = () => {
 
                 return (
                   <StoryCard
-                    key={index}
+                    key={value.id}
                     items={value as DetailsProp}
                     truncatedStr={truncatedStr}
                   />

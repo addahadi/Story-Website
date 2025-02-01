@@ -1,4 +1,4 @@
-import {Button} from "@/components/ui/button.tsx";
+import {Button} from "@/component/ui/button.tsx";
 import { useState} from "react";
 import EditProfile from "@/component/EditProfile.tsx";
 import {useParams} from "react-router-dom";

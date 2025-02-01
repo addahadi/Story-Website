@@ -1,6 +1,6 @@
 import Editor from "@/component/Editor";
 import Loader from "@/component/Loader";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/component/ui/button";
 
 import { db } from "@/utils/FirebaseConfig";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ import { sendNewNotfication } from "@/utils/Notification";
 import Suggestions from "@/component/Suggestions";
 import DynamicTextarea from "@/component/DynamicTextArea";
 import { toast } from "@/hooks/use-toast";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/component/ui/toaster";
 import { Op } from "quill";
 
 
@@ -31,8 +31,19 @@ const Sessions = () => {
   const { sessionId } = useParams();
   const navigate = useNavigate();
 
-  function handleClick() {
+  function handleSave() {
     setIsSave(true);
+  }
+  async function handleCancel(){
+    if(!sessionId) return
+    try {
+      setIsLoading(true);
+      await db.collection("WrittenStories").doc(sessionId).delete();
+      navigate('/');
+    }
+    catch(error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -45,7 +56,7 @@ const Sessions = () => {
       }
       if (typeof Data[0].insert === "string" && Data[0].insert?.length < 10) {
         toast({
-          description: "Over 60 words please",
+          description: "first line over 10 words please",
         });
         return;
       }
@@ -97,8 +108,8 @@ const Sessions = () => {
               />
             </div>
             <div className="flex gap-3">
-              <Button variant="outlineR">cancel</Button>
-              <Button variant="rounded" onClick={handleClick}>
+              <Button variant="outline" onClick={handleCancel}>cancel</Button>
+              <Button variant="default" onClick={handleSave}>
                 Save
               </Button>
             </div>

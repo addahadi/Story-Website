@@ -2,26 +2,32 @@ import useFetch from "@/hooks/FetchProfileStr.tsx";
 import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import { useUser } from "@/context/UserCon";
-import { Icon } from "@/component/Icon";
-
-
+import { Icon } from "@/component/ui/Icon.tsx";
+import {motion} from "framer-motion";
+import AlertCom from "@/component/ui/AlertCom.tsx";
 const About = () => {
     const {profileId} = useParams()
     const {Data} = useFetch(profileId ? profileId : "" );
     const {currentUser} = useUser()
     const [color , setColor] = useState('#242424')
+    const [storyId , setStoryId] = useState("");
+    const [isdelete , setIsdelete] = useState(false)
     useEffect(() => {
         console.log(Data)
     }, [Data]);
 
-
-
     return (
-        <div className=" flex-1 flex flex-col gap-12 ">
+        <div
+
+            className=" flex-1 flex flex-col gap-12 ">
             {Data.map((item, index) => {
                 const truncatedStr = item.desc.length > 100 ? item.desc.slice(0, 150) + "..." : item.desc
                 return (
-                  <div key={index} className=" w-full px-4 py-6 overflow-hidden bg-white-3 flex flex-row gap-4 items-center">
+                  <motion.div
+                      initial={{scale : 0}}
+                      animate={{scale : 1}}
+                      transition={{delay:1.4}}
+                      key={index} className=" relative w-full px-4 py-6 overflow-hidden bg-white-3 flex flex-row gap-4 items-center">
                     <img src={item.ImgUrl} width={150}  className=" rounded-md h-full"/>
                     <div className="flex flex-col gap-3 ">
                       <h1 className="text-lg font-bold text-black-2">
@@ -40,7 +46,19 @@ const About = () => {
                         })}
                       </div>
                     </div>
-                  </div>
+                      {
+                          currentUser?.uid == profileId &&
+                              (<motion.div
+                                  onClick={() => {
+                                      setIsdelete(!isdelete)
+                                      setStoryId(item.id)
+                                  }}
+                                  whileHover={{backgroundColor : "#8266c9"}}
+                                  className="absolute right-2 top-2 cursor-pointer p-2 rounded-full">
+                                  <img src="../../public/delete.svg" width={20}/>
+                              </motion.div>)
+                      }
+                  </motion.div>
                 );
             })}
             {
@@ -49,7 +67,7 @@ const About = () => {
                 <Icon.plus classes="w-[100px]" Color={color} />
             </Link> : ""
             }
-            
+            <AlertCom storyId={storyId}  isdelete={isdelete} setIsdelete={setIsdelete}/>
         </div>
     )
 }

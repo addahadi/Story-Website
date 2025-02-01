@@ -1,5 +1,5 @@
 import CoverImageUpload from "@/component/coverImg";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/component/ui/button";
 import { useStory } from "@/context/StoryCon";
 import { useUser } from "@/context/UserCon";
 
@@ -59,10 +59,12 @@ const StoryDetail = () => {
     error,
     Error,
     handleError,
+    ImgUrl,
+    setImgUrl,
   } = useError();
 
   const [loading, setLoading] = useState(false);
-  const [ImgUrl, setImgUrl] = useState("");
+
   const { currentUser } = useUser();
   const { setStoryId } = useStory();
   const navigate = useNavigate();
@@ -76,7 +78,7 @@ const StoryDetail = () => {
     ImgUrl: ImgUrl,
   };
 
-  async function handleClick() {
+  async function handleSave() {
     handleError();
     if (error) {
       await UploadDetails({ currentUser, setLoading, setStoryId, Details, navigate });
@@ -208,7 +210,7 @@ const StoryDetail = () => {
             </div>
             <Button
               className=" font-light text-lg  bg-orange-1"
-              onClick={handleClick}
+              onClick={handleSave}
             >
               {loading ? <Loading size={"20px"} /> : <span>Save</span>}
             </Button>

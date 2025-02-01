@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { Toaster } from "@/components/ui/toaster";
+import { Button } from "@/component/ui/button";
+import { Toaster } from "@/component/ui/toaster";
 import { toast } from "@/hooks/use-toast";
 import { useRef, useState } from "react";
 import { GeneratePlotDialog } from "./Customize";
-import { Icon } from "./Icon";
+import { Icon } from "./ui/Icon.tsx";
 import cn from "classnames"
 const Suggestions = ({
   selectedText,

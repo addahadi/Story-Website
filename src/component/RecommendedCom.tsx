@@ -3,18 +3,26 @@ import firebase from "firebase/compat/app";
 import { useEffect, useState } from "react";
 import StoryCard from "./StoryCard";
 import { DetailsProp } from "@/utils/type";
+import {Carousel, CarouselContent, CarouselNext, CarouselPrevious} from "@/component/ui/carousel.tsx";
+
+
+
+interface StoriesProps extends DetailsProp {
+  score: string;
+}
+
 
 async function RecommendedFilter(
   title: string,
   category: string,
   tags: string[],
   storyId: string | undefined
-) {
+) : Promise<StoriesProps[] | undefined> {
   try {
     const query = db
       .collection("WrittenStories")
       .where("category", "==", category);
-    const snapshots = await query.limit(5).get();
+    const snapshots = await query.limit(10).get();
     const stories = snapshots.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
     });
@@ -40,18 +48,15 @@ async function RecommendedFilter(
         return { ...story, score };
       });
 
-    const SortedStories = ScoredStories.sort((a, b) => {
+    const SortedStories : unknown = ScoredStories.sort((a, b) => {
       return b.score - a.score;
     });
-    return SortedStories;
+    return SortedStories as StoriesProps[];
   } catch (error) {
     console.log(error);
   }
 }
 
-interface StoriesProps extends DetailsProp {
-  score: string;
-}
 
 const RecommendedCom = ({
   Data,
@@ -65,12 +70,14 @@ const RecommendedCom = ({
   useEffect(() => {
     if (!Data) return;
     const { tag, title, category } = Data;
-    const data = RecommendedFilter(title, category, tag, storyId).then(
-      (r: any) => {
+    RecommendedFilter(title, category, tag, storyId).then(
+      (r) => {
+        if(r){
         setReStories(r);
+        }
       }
     );
-  }, [Data]);
+  }, [Data , storyId]);
 
   return (
     <section className=" mt-12 flex flex-col gap-4 ">
@@ -79,15 +86,19 @@ const RecommendedCom = ({
           You may also like
         </h1>
       </div>
-      <div className=" flex gap-3 items-center p-4">
-        {reStories &&
-          reStories.map((value) => {
-            const { title } = value;
-            const truncatedStr =
-              title.length > 30 ? title.slice(0, 30) + "..." : title;
-            return <StoryCard items={value} truncatedStr={truncatedStr} />;
-          })}
-      </div>
+      <Carousel>
+        <CarouselContent className=" flex gap-3 items-center p-4">
+          {reStories &&
+            reStories.map((value) => {
+              const { title } = value;
+              const truncatedStr =
+                title.length > 30 ? title.slice(0, 30) + "..." : title;
+              return <StoryCard items={value} truncatedStr={truncatedStr} />;
+            })}
+        </CarouselContent>
+        <CarouselPrevious/>
+        <CarouselNext/>
+      </Carousel>
     </section>
   );
 };

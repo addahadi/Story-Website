@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/component/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from "@/component/ui/dialog";
 import GetMultipleAnswers from "@/utils/GeminiConfig";
 import { GeneratePlotDialogProps } from "@/utils/type";
 import { useState } from "react";

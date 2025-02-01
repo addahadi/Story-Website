@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/component/ui/button.tsx";
 import { db } from "@/utils/FirebaseConfig";
 import { useNavigate } from "react-router-dom";
 // @ts-ignore

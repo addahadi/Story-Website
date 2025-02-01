@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Popup from "@/component/Popup.tsx";
 import { signOut } from "firebase/auth";
 import { Auth } from "@/utils/FirebaseConfig";
-import { Icon } from "./Icon";
+import { Icon } from "./ui/Icon.tsx";
 import { ListenToNotification, UnReadNotifcation } from "@/utils/Notification";
 import NotificationComp from "./NotificationComp";
 
@@ -95,9 +95,9 @@ const Navbar = () => {
                                 <span>Write Story</span>
                             </li>
                             <li
-                                onClick={handleClick}
-                                className="cursor-pointer w-max hover:text-white-2"
+                                className=" cursor-not-allowed w-max hover:text-white-2 flex gap-2"
                             >
+                                <img src="../public/lock.svg" width={20}/>
                                 <span>Generate Story</span>
                             </li>
                         </ul>
@@ -123,9 +123,10 @@ const Navbar = () => {
                                     )
                                 }
                                 className="border-b-2
-                    hover:text-white-2 cursor-pointer border-white-3 pb-3"
+                    hover:text-white-2 cursor-pointer border-orange-1 pb-3 flex gap-2"
                             >
-                                <span>My Profile</span>
+                                <img src="../public/profile.svg"  width={15}/>
+                                <span>Profile</span>
                             </li>
                             <li
                                 onClick={handleClick}

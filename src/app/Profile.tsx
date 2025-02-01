@@ -5,12 +5,13 @@ import DocumentData = firebase.firestore.DocumentData;
 import { Link, Outlet, useParams } from "react-router-dom";
 import cn from "classnames";
 import Panel from "@/component/Panel.tsx";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/component/ui/button.tsx";
 import { useUser } from "@/context/UserCon.tsx";
 import useFollow from "@/hooks/useFollow.tsx";
 import { ProfileAttributes } from "@/utils/util";
 import { ListenToFollowers } from "@/utils/Follow";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/component/ui/toaster";
+import {motion} from "framer-motion";
 
 const Profile = () => {
   const { profileId } = useParams();
@@ -41,19 +42,29 @@ const Profile = () => {
     const subscribe = ListenToFollowers(currentUser, setFollowersCount);
     return () => subscribe();
   }, [currentUser]);
+
+
   return (
-    <div className="max-w-[1200px] mx-auto">
-      <section className="pt-16 flex flex-col gap-10 border-b border-black-2">
+    <div
+        className="max-w-[1200px] mx-auto">
+      <section
+
+          className="pt-16 flex flex-col gap-10 border-b border-black-2">
         <div className="flex py-6 flex-col gap-8">
-          <h1 className=" text-5xl text-black-2 font-semibold">
-            {Data ? Data.name : ""}
-          </h1>
+          {Data?.name && (
+              <motion.h1
+                initial={{ color : "#8266c9"}}
+                animate={{ color : "#242424"}}
+                transition={{delay : 2}}
+                className=" text-5xl text-black-2 font-semibold"> {Data.name}</motion.h1>
+          )
+            }
           <div className=" flex gap-2 items-center justify-between w-fit">
             <h1 className=" text-lg text-black-2 ">{Data ? Data.name : ""}</h1>
             {currentUser?.uid != profileId && (
               <Button
                 disabled={isProcessing}
-                variant={!isFollow ? "follow" : "outFollow"}
+                variant="destructive"
                 onClick={toggleFollow}
               >
                 {isFollow ? <span>unfollow</span> : <span>follow</span>}

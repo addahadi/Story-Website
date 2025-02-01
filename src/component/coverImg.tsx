@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/component/ui/button";
 import { ApiController } from "@/utils/CloudConfig";
 // import { uploadImg } from "@/utils/CloudConfig";
 import React, { useRef, useState} from "react";

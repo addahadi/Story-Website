@@ -64,7 +64,8 @@ export type PartCom = Array<firebase.firestore.DocumentData | undefined>
 
 export interface GenreProps {
   genre : string,
-  color : string
+  color : string,
+  hoverColor : string
 }
 
 
@@ -106,9 +107,20 @@ export interface DetailsProp {
   desc : string
   title : string
   ImgUrl:string
+
 }
 
 type data  =  Op[]
+
+
+export interface StoriesProps extends DetailsProp {
+  score: number;
+}
+export interface AlertProps  {
+  isdelete: boolean ;
+  storyId : string ;
+  setIsdelete: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 export interface EditorProps extends Pick<EditorProp , "setWord"> {
   issave : boolean;

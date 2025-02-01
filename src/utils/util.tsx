@@ -133,19 +133,18 @@ export const cards = [
 ];
 
 
-export const genreColors = [
-  { genre: "Fantasy", color: "#D8BFD8" }, // Thistle (soft purple with a magical vibe)
-  { genre: "Comedy", color: "#FFF8DC" }, // Cornsilk (cheerful light yellow)
-  { genre: "Adventure", color: "#C1E1C1" }, // Light Green (fresh and vibrant)
-  { genre: "Mystery", color: "#D1D9E6" }, // Light Steel Blue (calm and mysterious)
-  { genre: "Sci-Fi", color: "#B4DDED" }, // Light Cyan (clean and futuristic)
-  { genre: "Romance", color: "#FADADD" }, // Light Pink (romantic and warm)
-  { genre: "Horror", color: "#F4CCCC" }, // Light Coral (soft reddish tone)
-  { genre: "Historical", color: "#F5DEB3" }, // Wheat (timeless and elegant)
-  { genre: "Thriller", color: "#C8D6E5" }, // Light Slate Gray (tense and clean)
-  { genre: "Poetry", color: "#E3F2FD" } // Baby Blue (calm and ethereal)
+export  const genreColors = [
+  { genre: "Fantasy", color: "#D8BFD8", hoverColor: "#C0A0C0" }, // Deeper purple for hover
+  { genre: "Comedy", color: "#FFF8DC", hoverColor: "#FFE4B5" }, // Light golden shade for hover
+  { genre: "Adventure", color: "#C1E1C1", hoverColor: "#A0D0A0" }, // Deeper green for hover
+  { genre: "Mystery", color: "#D1D9E6", hoverColor: "#B0C0D0" }, // Darker steel blue for hover
+  { genre: "Sci-Fi", color: "#B4DDED", hoverColor: "#90C8E0" }, // Deeper cyan for hover
+  { genre: "Romance", color: "#FADADD", hoverColor: "#F5B5C5" }, // Warmer pink for hover
+  { genre: "Horror", color: "#F4CCCC", hoverColor: "#E09A9A" }, // Darker coral for hover
+  { genre: "Historical", color: "#F5DEB3", hoverColor: "#EEC58A" }, // Golden wheat shade for hover
+  { genre: "Thriller", color: "#C8D6E5", hoverColor: "#A8BCCF" }, // Darker gray-blue for hover
+  { genre: "Poetry", color: "#E3F2FD", hoverColor: "#B0DAF0" } // Richer baby blue for hover
 ];
-
 
 export function getTextColor(backgroundColor : string) {
 

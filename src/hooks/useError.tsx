@@ -1,7 +1,7 @@
 
 import { toast } from "./use-toast"
 import { useState } from "react"
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/component/ui/toaster"
 
 const useDynamicList = () => {
     const [item , setItem] = useState<string>('')
@@ -30,6 +30,7 @@ export const useError = () =>  {
   const character = useDynamicList();
   const tag = useDynamicList();
   const [error , setError] = useState(false)
+  const [ImgUrl, setImgUrl] = useState("");
 
   const inputs = {
     title : title,
@@ -37,9 +38,10 @@ export const useError = () =>  {
     category : category,
     character : character.itemList[0] ,
     tag : tag.itemList[0],
+    ImgUrl : ImgUrl,
   }
 
-  const errors : any = []
+  const errors : Array<string> = []
   for (const key of Object.keys(inputs) as Array<keyof typeof inputs>) {
      if (!inputs[key]) {
        errors.push(key);
@@ -81,5 +83,7 @@ export const useError = () =>  {
     error,
     Error,
     handleError,
+    ImgUrl,
+    setImgUrl,
   };
 }

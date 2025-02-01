@@ -1,16 +1,18 @@
 import Panel from "./Panel";
 import { StoryPanelProp } from "@/utils/type";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/component/ui/button";
 import { useUser } from "@/context/UserCon.tsx";
 import { useNavigate, useParams } from "react-router-dom";
-import { Icon } from "@/component/Icon.tsx";
+import { Icon } from "@/component/ui/Icon.tsx";
 import { useEffect, useState } from "react";
 import { db } from "@/utils/FirebaseConfig";
 
 import firebase from "firebase/compat/app";
 import { StoryAttributes } from "@/utils/util";
 import { toast } from "@/hooks/use-toast";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/component/ui/toaster";
+import {motion} from "framer-motion";
+
 
 const Color = ["#ff4747", "#808080"];
 const StoryBanner = ({ Data, length, Parts }: StoryPanelProp) => {
@@ -130,15 +132,22 @@ const StoryBanner = ({ Data, length, Parts }: StoryPanelProp) => {
     <section className=" py-8 flex  justify-center items-center w-full shadow-xl">
       <div className="flex gap-8  w-fit">
         <div className=" w-fit ">
-          <img
+          <motion.img
+              initial={{scale : 0}}
+              animate={{scale : 1}}
+              transition={{delay: 2}}
             src={Data && Data.ImgUrl}
             className=" rounded-md w-[330px] h-full"
           />
         </div>
         <div className="  py-10 flex flex-col gap-5  w-fit">
-          <h1 className=" text-4xl font-semibold w-max">
+          <motion.h1
+              initial={{  color : "#8266c9"}}
+              animate={{  color : "#242424"}}
+              transition={{delay: 2}}
+              className=" text-4xl font-semibold w-max">
             {Data && Data.title}
-          </h1>
+          </motion.h1>
           <div className="flex flex-row gap-2 ">
             <span className=" w-fit inline-block bg-gray-100 text-gray-700 rounded-full px-3 py-1 text-sm mr-2 mb-2">
               {Data && Data.category}

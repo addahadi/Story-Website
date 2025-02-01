@@ -48,7 +48,7 @@ export function ListenToNotification(
   const notificationRef = db
     .collection("user")
     .doc(currentUser?.uid)
-    .collection("Notification");
+    .collection("Notification").where("read" ,"==",false);
 
   const unsubscribe = notificationRef.onSnapshot((docs) => {
     const fetchedNotfication: Array<Record<string, string | boolean>> = [];
@@ -72,24 +72,25 @@ export function UnReadNotifcation(
   const unReadQuery = notificationRef.where("read", "==", false);
   const unsubscribe = unReadQuery.onSnapshot((snapShot) => {
     setUnRead(snapShot.size);
-    console.log(snapShot.size);
   });
 
   return unsubscribe;
 }
 
 export async  function MarkAllAsRead(currentUser : UserType){
-  const notificationRef = db
-      .collection("user")
-      .doc(currentUser?.uid)
-      .collection("Notification");
   try  {
+    const notificationRef = db
+        .collection("user")
+        .doc(currentUser?.uid)
+        .collection("Notification");
+
     const snapshot = await notificationRef.where("read","==", false).get()
     if (snapshot.empty) return;
 
     for (const docSnap of snapshot.docs) {
-      await notificationRef.doc(docSnap.id).update({ isRead: true });
+      await notificationRef.doc(docSnap.id).update({ read: true });
     }
+    console.log("hi")
   }
   catch(error){
     console.log(error)
