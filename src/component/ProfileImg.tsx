@@ -8,7 +8,7 @@ const ProfileImg = ({
     const {author} = useAuthor(senderId)
   return (
     <Link to={`/profile/${senderId}/about`}>
-        <img src={author?.PhotoUrl} width={60} className=" rounded-full" />
+        <img src={author?.PhotoUrl} width={60} className=" rounded-full max-md:w-[40px]" />
     </Link>
   )
 }

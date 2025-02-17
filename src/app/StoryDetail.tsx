@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "react-simple-loading";
 import firebase from "firebase/compat/app";
 import Timestamp = firebase.firestore.Timestamp;
+import {toast} from "@/hooks/use-toast.ts";
 
 const UploadDetails = async ({
   currentUser,
@@ -36,10 +37,15 @@ const UploadDetails = async ({
         time: Timestamp.now(),
       });
       setStoryId(podcastID);
-      navigate(`/session/${podcastID}`);
+      navigate(`/session/${podcastID}` , { state: { from: "new" } });
 
     } catch (error) {
-      console.log(error);
+        toast({
+          variant: "destructive",
+          title:"Uh oh! Something went wrong",
+          description:"There was a problem with your request."
+        })
+      console.log(error)
     } finally {
       setLoading(false);
     }
@@ -56,7 +62,6 @@ const StoryDetail = () => {
     setCategory,
     character,
     tag,
-    error,
     Error,
     handleError,
     ImgUrl,
@@ -79,16 +84,14 @@ const StoryDetail = () => {
   };
 
   async function handleSave() {
-    handleError();
-    if (error) {
+    if (!handleError()) return
       await UploadDetails({ currentUser, setLoading, setStoryId, Details, navigate });
-    }
   }
 
   return (
     <div>
       <div className="flex flex-row w-full h-fit absolute left-0">
-        <div className=" flex justify-center items-center bg-orange-300">
+        <div className=" flex justify-center items-center max-xl:hidden">
           <img src="../public/writeS.webp" width={500} className="h-full" />
         </div>
         <div className=" flex-1 pt-5 px-4 h-full   w-2/5 relative">
@@ -139,7 +142,6 @@ const StoryDetail = () => {
                   className="bg-gray-200 p-2 rounded hover:bg-gray-300"
                   onClick={() => {
                     character.addItem();
-                    console.log(character.itemList);
                   }}
                 >
                   +
@@ -148,7 +150,7 @@ const StoryDetail = () => {
               <div className="mt-2">
                 {character.itemList?.map((name) => {
                   return (
-                    <span className="inline-block bg-gray-100 text-gray-700 rounded-full px-3 py-1 text-sm mr-2 mb-2">
+                    <span key={name} className="inline-block bg-gray-100 text-gray-700 rounded-full px-3 py-1 text-sm mr-2 mb-2">
                       {name}
                     </span>
                   );
@@ -160,11 +162,15 @@ const StoryDetail = () => {
               <label className="block font-semibold mb-1 text-lg">
                 Category
               </label>
+
+
+
               <select
                   className="w-full border border-gray-300 rounded p-2"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
               >
+
                 <option value="">Select a category</option>
                 <option value="fantasy">fantasy</option>
                 <option value="adventure">adventure</option>
@@ -201,7 +207,7 @@ const StoryDetail = () => {
               <div className="mt-2">
                 {tag.itemList.map((name) => {
                   return (
-                    <span className="inline-block bg-gray-100 text-gray-700 rounded-full px-3 py-1 text-sm mr-2 mb-2">
+                    <span key={name} className="inline-block bg-gray-100 text-gray-700 rounded-full px-3 py-1 text-sm mr-2 mb-2">
                       {name}
                     </span>
                   );

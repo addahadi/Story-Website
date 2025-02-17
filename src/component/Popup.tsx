@@ -11,7 +11,7 @@ const Popup = React.forwardRef<HTMLDivElement,PopupProp<boolean>>(({children , o
                   initial={{ opacity: 0}}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className={cn("absolute  top-10 left-0")}>
+                  className={cn("absolute  top-10 left-0 max-sm:-left-16")}>
                 <div className=" z-50 shadow-custom-equal w-full px-4 py-2 bg-white-1 rounded-md" {...props}>
                     {children}
                 </div>

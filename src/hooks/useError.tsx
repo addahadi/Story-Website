@@ -29,7 +29,7 @@ export const useError = () =>  {
   const [category, setCategory] = useState<string>("");
   const character = useDynamicList();
   const tag = useDynamicList();
-  const [error , setError] = useState(false)
+
   const [ImgUrl, setImgUrl] = useState("");
 
   const inputs = {
@@ -41,36 +41,28 @@ export const useError = () =>  {
     ImgUrl : ImgUrl,
   }
 
-  const errors : Array<string> = []
-  for (const key of Object.keys(inputs) as Array<keyof typeof inputs>) {
-     if (!inputs[key]) {
-       errors.push(key);
-     }
-  }
-  function handleError(){
-    switch (errors.length) {
-      case 0:
-        setError(true)
-        break;
-      case 1:
-        toast({
-          title: "Error occur",
-          description: `you have not fill in ${errors[0]} `,
-          variant: "destructive",
-        });
-        setError(false)
-        break;
-      default:
-        toast({
-          title: "Error occur",
-          description: "you have not fill in the  inputs",
-          variant: "destructive",
-        });
-        setError(false)
-        break;
+  function handleError(): boolean {
+    const errors: Array<string> = [];
+    for (const key of Object.keys(inputs) as Array<keyof typeof inputs>) {
+      if (!inputs[key]) {
+        errors.push(key);
+      }
+    }
+
+    if (errors.length === 0) {
+
+      return true;
+    } else {
+      toast({
+        title: "Error occurred",
+        description: errors.length === 1
+            ? `You have not filled in ${errors[0]}`
+            : "You have not filled in the required inputs",
+        variant: "destructive",
+      });
+      return false
     }
   }
-
   return {
     title,
     setTitle,
@@ -80,7 +72,6 @@ export const useError = () =>  {
     setCategory,
     tag,
     character,
-    error,
     Error,
     handleError,
     ImgUrl,

@@ -8,6 +8,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/component/ui/carousel"
+import Autoplay from "embla-carousel-autoplay";
+
 const useSpecificFetch = (Category: string) => {
   const [Data, setData] = useState<DetailsProp[]>([]);
 
@@ -49,23 +51,24 @@ const Banner = ({ Category }: { Category: string }) => {
     setSortedData(SSdarr);
   }, [Data]);
   return (
-    <section className="flex flex-col gap-5 w-full">
-      <h1 className="text-3xl  text-black-2">
+    <div className="flex flex-col gap-5   w-full ">
+      <h1 className="text-3xl  text-black-2 max-lg:text-2xl max-lg:font-semibold max-sm:text-xl max-sm:font-semibold">
         Top <span className="text-orange-1">{Category}</span> Stories
       </h1>
-      <Carousel>
-        <CarouselContent className=" p-4 flex gap-4 ">
+      <Carousel  className=" w-full" plugins={[Autoplay({delay:2000})]}
+                 opts={{loop:true}}>
+        <CarouselContent className=" p-4 flex gap-4 max-md:gap-0" >
           {SortedData.map((items) => {
             const { title } = items;
             const truncatedStr =
               title.length > 30 ? title.slice(0, 30) + "..." : title;
-            return <StoryCard items={items} truncatedStr={truncatedStr} />;
+            return <StoryCard key={items.id} items={items} truncatedStr={truncatedStr} searchItem={true}/>;
           })}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className=" max-lg:hidden"/>
+        <CarouselNext  className=" max-lg:hidden"/>
       </Carousel>
-    </section>
+    </div>
   );
 };
 

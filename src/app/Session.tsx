@@ -1,10 +1,9 @@
 import Editor from "@/component/Editor";
 import Loader from "@/component/Loader";
 import { Button } from "@/component/ui/button";
-
 import { db } from "@/utils/FirebaseConfig";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams} from "react-router-dom";
 // @ts-ignore
 import Loading from "react-simple-loading";
 import { useUser } from "@/context/UserCon.tsx";
@@ -26,9 +25,10 @@ const Sessions = () => {
   const [Issave, setIsSave] = useState(false);
   const [Data, setData] = useState<Op[]>([]);
   const [isloading, setIsLoading] = useState(false);
-
   const [selectedText, setSelectedText] = useState("");
   const { sessionId } = useParams();
+  const location = useLocation();
+  const [source , setSource] = useState("");
   const navigate = useNavigate();
 
   function handleSave() {
@@ -36,15 +36,27 @@ const Sessions = () => {
   }
   async function handleCancel(){
     if(!sessionId) return
-    try {
-      setIsLoading(true);
-      await db.collection("WrittenStories").doc(sessionId).delete();
+    if(!source) return
+    if(source == "story"){
       navigate('/');
     }
-    catch(error) {
-      console.log(error)
+    if(source == "new"){
+      try {
+
+        setIsLoading(true);
+        await db.collection("WrittenStories").doc(sessionId).delete();
+        navigate('/');
+      }
+      catch(error) {
+        console.log(error)
+      }
     }
   }
+
+  useEffect(() => {
+    const source = location?.state?.from
+    setSource(source);
+  } , [location])
 
   useEffect(() => {
     async function StoreData() {
@@ -81,12 +93,10 @@ const Sessions = () => {
   }, [Data]);
   return (
     <div className=" w-full bg-white-3 ">
-      <header className=" m-auto max-w-[1400px]">
+      <header className=" m-auto max-w-[1400px] px-5">
         <div className=" py-4 flex">
           <div className=" flex flex-row gap-3 flex-1">
-            <Link to="/">
               <img src="../public/logo.svg" width={40} height={40} />
-            </Link>
             <div className="flex flex-col ">
               <h1 className=" text-lg">{title as number}</h1>
               <div
@@ -116,9 +126,9 @@ const Sessions = () => {
           </div>
         </div>
       </header>
-      <main className="m-auto mt-4  max-w-[1300px]">
+      <main className="m-auto mt-4  max-w-[1300px] px-5">
         <DynamicTextarea setTitle={setTitle} />
-        <div className=" flex flex-row w-full gap-3 mt-4">
+        <div className=" flex flex-row w-full gap-3 mt-4 max-md:flex-col">
           <Editor issave={Issave} setdata={setData} setIssave={setIsSave} setWord={setWord} />
           <Suggestions
             selectedText={selectedText}

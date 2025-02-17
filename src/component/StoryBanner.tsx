@@ -24,7 +24,7 @@ const StoryBanner = ({ Data, length, Parts }: StoryPanelProp) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [IsSave, setIsSave] = useState(false);
   const [like, setLike] = useState(0);
-
+  const [shorterTitle , setShorterTitle] = useState("")
   function Save() {
     setIsSave(!IsSave);
   }
@@ -107,12 +107,11 @@ const StoryBanner = ({ Data, length, Parts }: StoryPanelProp) => {
   }
 
   useEffect(() => {
-    let unsubscribe: any;
+    let unsubscribe: () => void;
     function ListenToLike() {
       const likeRef = db.collection("WrittenStories").doc(storyId);
       unsubscribe = likeRef.onSnapshot((doc) => {
         const data = doc.data();
-        console.log(data);
         setLike(data?.likes);
       });
     }
@@ -120,8 +119,14 @@ const StoryBanner = ({ Data, length, Parts }: StoryPanelProp) => {
     return () => unsubscribe();
   }, [currentUser, storyId]);
 
+
+  useEffect(() => {
+    if(!Data) return
+    const truncatedStr = Data.title?.length > 20 ? Data.title?.slice(0, 20) + "..." : Data.title;
+    setShorterTitle(truncatedStr)
+  },[Data]);
   function handleClick() {
-    navigate(`/session/${storyId}`);
+    navigate(`/session/${storyId}` , { state: { from: "story" } });
   }
   function handleReading() {
     if (!Parts) return;
@@ -129,15 +134,15 @@ const StoryBanner = ({ Data, length, Parts }: StoryPanelProp) => {
   }
 
   return (
-    <section className=" py-8 flex  justify-center items-center w-full shadow-xl">
-      <div className="flex gap-8  w-fit">
+    <section className=" py-8 flex  justify-center items-center w-full shadow-xl pr-3">
+      <div className="flex gap-8  w-fit max-sm:gap-4">
         <div className=" w-fit ">
           <motion.img
               initial={{scale : 0}}
               animate={{scale : 1}}
               transition={{delay: 2}}
             src={Data && Data.ImgUrl}
-            className=" rounded-md w-[330px] h-full"
+            className=" rounded-md w-[330px] h-full max-lg:w-[270px] max-md:w-[230px] max-sm:[180px]"
           />
         </div>
         <div className="  py-10 flex flex-col gap-5  w-fit">
@@ -145,8 +150,8 @@ const StoryBanner = ({ Data, length, Parts }: StoryPanelProp) => {
               initial={{  color : "#8266c9"}}
               animate={{  color : "#242424"}}
               transition={{delay: 2}}
-              className=" text-4xl font-semibold w-max">
-            {Data && Data.title}
+              className=" text-4xl font-semibold w-max max-lg:text-3xl max-md:text-2xl max-sm:text-xl">
+            {Data && shorterTitle}
           </motion.h1>
           <div className="flex flex-row gap-2 ">
             <span className=" w-fit inline-block bg-gray-100 text-gray-700 rounded-full px-3 py-1 text-sm mr-2 mb-2">
@@ -163,7 +168,7 @@ const StoryBanner = ({ Data, length, Parts }: StoryPanelProp) => {
                 const data = index == 0 ? like : length;
                 const attributes = { ...value, data };
                 return (
-                  <div>
+                  <div key={index}>
                     {index == 1 && (
                       <span className="w-[1px] h-full bg-black-2"></span>
                     )}

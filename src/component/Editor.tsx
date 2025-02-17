@@ -61,7 +61,6 @@ const Editor = ({
                 formData.append("file",file);
                 const result  = await ApiController().UploadImg(formData);
                 const range = this.quill.getSelection();
-                console.log(range);
                 if(range) this.quill.insertEmbed(range.index, 'image', result.url);
               }
             }

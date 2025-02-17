@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import StoryCard from "./StoryCard";
 import { DetailsProp } from "@/utils/type";
 import {Carousel, CarouselContent, CarouselNext, CarouselPrevious} from "@/component/ui/carousel.tsx";
+import Autoplay from "embla-carousel-autoplay";
 
 
 
@@ -80,26 +81,27 @@ const RecommendedCom = ({
   }, [Data , storyId]);
 
   return (
-    <section className=" mt-12 flex flex-col gap-4 ">
+    <div className=" mt-12 flex flex-col gap-4 px-4">
       <div>
         <h1 className=" text-2xl text-black-2 font-semibold">
           You may also like
         </h1>
       </div>
-      <Carousel>
-        <CarouselContent className=" flex gap-3 items-center p-4">
+      <Carousel plugins={[Autoplay({delay:2000})]}
+                opts={{loop:true}}>
+        <CarouselContent className=" flex gap-4 max-md:gap-1 max-sm:gap-0 items-center p-4">
           {reStories &&
             reStories.map((value) => {
               const { title } = value;
               const truncatedStr =
                 title.length > 30 ? title.slice(0, 30) + "..." : title;
-              return <StoryCard items={value} truncatedStr={truncatedStr} />;
+              return <StoryCard key={value.id} items={value} truncatedStr={truncatedStr} />;
             })}
         </CarouselContent>
-        <CarouselPrevious/>
-        <CarouselNext/>
+        <CarouselPrevious className=" max-lg:hidden"/>
+        <CarouselNext className="max-lg:hidden"/>
       </Carousel>
-    </section>
+    </div>
   );
 };
 

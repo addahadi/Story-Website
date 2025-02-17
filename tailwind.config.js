@@ -7,6 +7,7 @@ export default {
     "./node_modules/@shadcn/ui/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+
     extend: {
       boxShadow: {
         "custom-equal":

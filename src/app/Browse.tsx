@@ -14,7 +14,7 @@ const Browse = () => {
         <CenteredCom>
             <motion.div
                 initial={{ x : -100}}
-                animate={{ x: 0 }} className=" w-full py-14   ">
+                animate={{ x: 0 }} className=" w-full py-14  px-5  ">
                 <div className=" flex flex-col gap-6">
                     <h1 className=" text-4xl text-black-2 font-semibold">
                         Browse
@@ -23,15 +23,15 @@ const Browse = () => {
                         Explore by genre, mood, or trending reads.
                     </p>
                 </div>
-                <div className=" grid grid-cols-3 gap-8 mt-24">
+                <div className=" grid grid-cols-3 gap-8 mt-24 max-md:grid-cols-2 max-sm:grid-cols-1">
                     {
                         categories.length > 0 && categories.map((categorie : GenreProps , index : number) => {
                             const { genre , color , hoverColor} = categorie
                             const textColor = getTextColor(color)
 
                             return (
-                                <motion.div whileHover={{ backgroundColor : hoverColor}} className={` cursor-pointer rounded-3xl w-[250]  p-6 h-52 `} style={{backgroundColor:color}}>
-                                    <Link to={`/category/${genre.toLowerCase()}`} key={index} className="w-full h-full flex flex-col justify-end"  >
+                                <motion.div key={index} whileHover={{ backgroundColor : hoverColor}} className={` cursor-pointer rounded-3xl  p-6 h-52 `} style={{backgroundColor:color}}>
+                                    <Link to={`/category/${genre.toLowerCase()}`}  className="w-full h-full flex flex-col justify-end"  >
                                         <p style = {{color : textColor}} className=" text-2xl font-semibold  text-end ">
                                             {genre}
                                         </p>

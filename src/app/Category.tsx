@@ -85,7 +85,7 @@ const Category = () => {
         <div className="max-w-[1200px] m-auto">
             <div className=" py-10 flex flex-col gap-12 justify-center items-center">
 
-                <div className="flex flex-row gap-1 mt-20 items-center w-full">
+                <div className="flex flex-row gap-1 mt-20 items-center w-full px-5">
                     <Input onChange={(e) => setSearch(e.target.value)} value={search} type="search"
                            className=" rounded-lg py-6 border-2 flex-1"
                            placeholder="search here"/>
@@ -94,15 +94,15 @@ const Category = () => {
                     </Button>
 
                 </div>
-                <div className="flex flex-row gap-6 flex-wrap">
+                <div className="flex flex-row gap-6 flex-wrap px-5">
                     {
                         categories.length > 0 && categories.map((categorie, index: number) => {
                             const {genre, color , hoverColor} = categorie
                             const textColor = getTextColor(color)
 
                             return (
-                                <motion.div whileHover={{backgroundColor : hoverColor }} className={` cursor-pointer rounded-lg p-2 `}>
-                                    <Link to={`/category/${genre.toLowerCase()}`} key={index}
+                                <motion.div key={index} whileHover={{backgroundColor : hoverColor }} className={` cursor-pointer rounded-lg p-2 `}>
+                                    <Link to={`/category/${genre.toLowerCase()}`}
                                           className="w-full h-full"
                                           >
                                         <p style={{color: textColor}} className="font-semibold  text-center ">
@@ -116,19 +116,20 @@ const Category = () => {
                     }
                 </div>
             </div>
-                <main className=" p-5 flex flex-row gap-5 flex-wrap">
-                        {targetValue.length > 0 ? targetValue.map((item) => {
-                                const {title} = item
-                                const truncatedStr = title.length > 30 ? title.slice(0, 30) + "..." : title;
-                                return (
-                                    <StoryCard key={item.id} items={item} truncatedStr={truncatedStr}/>
+                <main className=" border-t border-black-2 p-5 flex flex-row gap-2 flex-wrap max-md:justify-center">
+                    {targetValue.length > 0 ? targetValue.map((item) => {
+                            const {title} = item
+                            const truncatedStr = title.length > 30 ? title.slice(0, 30) + "..." : title;
+                            return (
+                                <StoryCard key={item.id} items={item} truncatedStr={truncatedStr} searchItem={false}/>
 
-                                )
-                            }) :
-                            <div className=" flex w-full items-center mt-8 justify-center">
-                                <img src="../public/SearchEr.jpg" width={250}/>
-                            </div>
-                        }
+                            )
+                        }) :
+                        <div className="flex flex-col w-full gap-4 justify-center items-center py-6 text-gray-600 text-sm">
+                            <img src="../../public/person-sitting.png" width={200}/>
+                            <p>it seems there is no result for you search ,👀</p>
+                        </div>
+                    }
                 </main>
         </div>
     )

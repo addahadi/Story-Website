@@ -81,12 +81,22 @@ export interface GeneratePlotDialogProps {
   setData :  React.Dispatch<React.SetStateAction<string[]>>
 }
 
+type OpenAtt = Pick<GeneratePlotDialogProps,"isopen" | "setIsopen">
+
+
+export interface AuthPopupProps  extends  OpenAtt{
+     setIsLogin : React.Dispatch<React.SetStateAction<boolean>>;
+     isLogin : boolean
+}
+
+
+
 
 export interface attributesProps{
-  bold? : boolean 
+  bold? : boolean
   italic?: boolean
   underline? : boolean
-  header?:number 
+  header?:number
   color: string
 }
 
@@ -125,10 +135,11 @@ export interface AlertProps  {
 export interface EditorProps extends Pick<EditorProp , "setWord"> {
   issave : boolean;
   setIssave : React.Dispatch<React.SetStateAction<boolean>>;
-  setdata : React.Dispatch<React.SetStateAction<data>>; 
+  setdata : React.Dispatch<React.SetStateAction<data>>;
 }
 
 export interface TextDataProps  {
   data: Record<string, string>
   type: string
 }
+

@@ -84,16 +84,16 @@ const ReadStory = () => {
   return (
       <div className="relative">
         <Slider isliding={isliding} />
-        <div className="flex flex-row bg-white-1 w-full">
+        <div className="flex flex-row bg-white-1 w-full max-lg:flex-col">
           <div className="relative z-10">
             <Select onValueChange={(e) => navigate(`/read/${e}`)}>
-              <SelectTrigger className="   sticky top-[80px] left-0 px-10 py-6  w-[300px]">
+              <SelectTrigger className="   sticky top-[80px] left-0 px-10 py-6  lg:w-[300px] 2xl:w-[400px]  max-lg:w-full">
                 <SelectValue placeholder="Table of contents"></SelectValue>
               </SelectTrigger>
               <SelectContent className=" outline-none focus:border top-11">
                 {docs.map((doc) => {
                   return (
-                    <SelectItem value={doc.id} className=" text-black-2">
+                    <SelectItem key={doc.id} value={doc.id} className=" text-black-2">
                       {doc.title}
                     </SelectItem>
                   );
@@ -109,7 +109,7 @@ const ReadStory = () => {
               <AuthorDetail owner={Owner} />
             </div>
             <TextField Data={Data}></TextField>
-            {nextDocId != readId ? (
+            {nextDocId ?(
               <Button
                 className="w-full mt-4"
                 onClick={() => navigate(`/read/${nextDocId}`)}

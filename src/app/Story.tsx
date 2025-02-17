@@ -43,7 +43,6 @@ const Story = () => {
 
         getChapters(storyId ? storyId : "").then((result) => {
           if (!result) return;
-          console.log(result);
           setParts(result);
           setLength(result.length);
         });
@@ -58,7 +57,7 @@ const Story = () => {
     <div>
       <StoryBanner Data={Data} length={length} Parts={Parts[0]} />
       <CenteredCom>
-        <div className=" flex w-full flex-row gap-4 mt-10 h-fit">
+        <div className=" flex w-full flex-row gap-4 mt-10 h-fit max-lg:flex-col px-4">
           <StoryInfo Data={Data} />
           <PartsCom Parts={Parts} />
         </div>

@@ -5,7 +5,7 @@ import DocumentData = firebase.firestore.DocumentData;
 
 const PartsCom  = ({Parts} :{Parts :  PartCom}) => {
     return (
-        <div className=" border-2 p-3 flex flex-col gap-3 rounded-lg min-w-[360px] ">
+        <div className=" border-2 p-3 flex flex-col gap-3 rounded-lg 2xl:w-[400px] lg:w-[360px]  max-lg:w-full">
             <h1 className="text-xl font-semibold  text-black-2">
                 Table of contents
             </h1>

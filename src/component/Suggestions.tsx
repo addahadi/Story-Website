@@ -66,7 +66,7 @@ const Suggestions = ({
   return (
     <div
       className={cn(" h-[500px] max-h-[500px] pb-2   bg-white-1 border border-[#ccc] flex flex-col gap-3 rounded-tl-[20px] rounded-tr-[20px]" , {
-        "w-[400px] max-w-[400px]" : isclose,
+        "w-[400px] max-lg:w-[320px] max-md:w-full" : isclose,
         "w-fit" : !isclose
       })}
     >
@@ -89,10 +89,9 @@ const Suggestions = ({
             {" justify-center items-center": isclose}
         )}
       >
-        {data.length > 0 ? data.map((value) => {
-          console.log(value);
+        {data.length > 0 ? data.map((value , index) => {
               return (
-                <div className=" bg-white-3 px-4 py-3 rounded-lg flex flex-col gap-3">
+                <div key={index} className=" bg-white-3 px-4 py-3 rounded-lg flex flex-col gap-3">
                   <div className=" w-full flex flex-row justify-end">
                     <div
                       className=" p-2 rounded-full w-fit hover:bg-orange-2 hover:border hover:border-orange-1  cursor-pointer transition-colors"

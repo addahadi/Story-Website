@@ -1,27 +1,5 @@
 import { attributesProps } from "./type";
 
-export const LeftSideCom = [
-    {
-        title:"Home",
-        icon:"../public/home.svg",
-        path:"/"
-    },
-    {
-        title:"Write-Story",
-        icon:"../public/create.svg",
-        path:"/write"
-    },
-    {
-        title:"Discover",
-        icon:"../public/people.svg",
-        path:"/people"
-    },
-    {
-        title:"Profile",
-        icon:"../public/profile.svg",
-        path:"/profile"
-    },
-]
 
 export const StoryCategory = [
   {
@@ -169,9 +147,9 @@ function handleAttributes(attributes : attributesProps){
   if(attributes.hasOwnProperty("bold")) style += " font-semibold "
   if(attributes.hasOwnProperty("header")) style += ` text-[${attributes.header}rem] `;
   if(attributes.hasOwnProperty("italic")) style += " italic"
-  if(attributes.hasOwnProperty("underline")) style +=" underline "
-  if(attributes.hasOwnProperty("color")) style += ` text-[${attributes.color}] `
-  console.log(style)
+  if(attributes.hasOwnProperty("underline")) style += " underline "
+  if(attributes.hasOwnProperty("color")) style += `text-[${attributes.color}] `
+
   return style
 }
 

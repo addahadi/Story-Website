@@ -18,7 +18,6 @@ import Category from "@/app/Category.tsx";
 
 
 function App() {
-
   return (
     <StoryProvider>
       <UserProvider>
