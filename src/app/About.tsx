@@ -1,6 +1,6 @@
 import useFetch from "@/hooks/FetchProfileStr.tsx";
 import {Link, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import { useUser } from "@/context/UserCon";
 import { Icon } from "@/component/ui/Icon.tsx";
 import {motion} from "framer-motion";

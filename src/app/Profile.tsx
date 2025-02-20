@@ -95,7 +95,7 @@ const Profile = () => {
                   "border-b-4 border-orange-1": showAbout,
                 })}
               >
-                About
+                Home
               </li>
             </Link>
             <Link to="home">
@@ -108,7 +108,7 @@ const Profile = () => {
                   "border-b-4 border-orange-1": showHome,
                 })}
               >
-                Home
+                About
               </li>
             </Link>
           </ul>

@@ -8,7 +8,7 @@ const StoryInfo = ({Data} : {Data : DocumentData |undefined}) => {
     return (
         <div className=" border-2 w-full h-fit  rounded-lg flex flex-col gap-3 p-5">
             <Link to={`/profile/${Data && Data.author}/about`}  className="flex gap-2 items-center">
-                <img  alt="User" src={ author?.PhotoUrl ? author?.PhotoUrl  : ""} width={30}/>
+                <img  alt="User" src={ author?.PhotoUrl ? author?.PhotoUrl  : "../public/user.svg"} width={30}/>
                 <span>{author?.name ? author?.name : ""}</span>
             </Link>
             <div>
