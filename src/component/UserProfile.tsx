@@ -17,7 +17,7 @@ const UserProfile = ({Data , FollowersCount} : {Data : DocumentData | undefined,
                     :
                     (
                         <img
-                            src="../../public/user.svg" width={120}
+                            src="/Story-Website/user.svg" width={120}
                             className="rounded-full lg:width-[40px] max-lg:width-[60px] max-md:width-[50px]"
                         />
                     )

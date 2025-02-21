@@ -79,7 +79,7 @@ const Suggestions = ({
               className=" p-2 rounded-full cursor-pointer hover:border hover:bg-orange-2 hover:border-orange-1 transition-colors"
               onClick={Delete}
             >
-              <img src="../public/delete.svg" width="20px" />
+              <img src="/Story-Website/delete.svg" width="20px" />
             </div>
             : "" }    
       </div>
@@ -97,7 +97,7 @@ const Suggestions = ({
                       className=" p-2 rounded-full w-fit hover:bg-orange-2 hover:border hover:border-orange-1  cursor-pointer transition-colors"
                       onClick={CopyText}
                     >
-                      <img src="../public/copy.svg" width="20px" />
+                      <img src="/Story-Website/copy.svg" width="20px" />
                     </div>
                   </div>
                   <p ref={TextRef} className=" text-black-2">
@@ -107,15 +107,14 @@ const Suggestions = ({
               );
             })
           : <div className=" flex flex-row gap-3 items-center">
-              <img src="../public/clock.svg" width="40px" />
+              <img src="/Story-Website/clock.svg" width="40px" />
               <span className=" text-lg text-white-2 font-semibold" >Empty</span>
             </div>}
       </div> : "" }
       {isclose ?
       <div className=" w-full px-2">
         <Button
-          variant="follow"
-          className=" rounded-none  w-full"
+          className=" rounded-none  w-full bg-orange-1 text-white-1 border border-orange-1 hover:bg-orange-2 hover:text-black-2 "
           onClick={handleClick}
         >
           Generate

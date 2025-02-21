@@ -51,14 +51,14 @@ const About = () => {
                                   }}
                                   whileHover={{backgroundColor : "#8266c9"}}
                                   className="absolute right-2 top-2 cursor-pointer p-2 rounded-full">
-                                  <img src="../../public/delete.svg" width={20}/>
+                                  <img src="/Story-Website/delete.svg" width={20}/>
                               </motion.div>)
                       }
                   </motion.div>
                 );
             }) :
             <div className=" w-full h-[300px] flex justify-center items-center">
-                <img src="../../public/person-sitting.png"  width={200} />
+                <img src="/Story-Website/person-sitting.png"  width={200} />
             </div>}
             {
                 currentUser?.uid == profileId ? <Link to='/new' onMouseEnter={() => setColor("#fff")} onMouseLeave={() => setColor("#242424")} 

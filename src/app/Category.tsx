@@ -90,7 +90,7 @@ const Category = () => {
                            className=" rounded-lg py-6 border-2 flex-1"
                            placeholder="search here"/>
                     <Button variant="outline" className=" border-2  rounded-xl" onClick={Search}>
-                        <img src="../public/search.svg" width={20}/>
+                        <img src="/Story-Website/search.svg" width={20}/>
                     </Button>
 
                 </div>
@@ -126,7 +126,7 @@ const Category = () => {
                             )
                         }) :
                         <div className="flex flex-col w-full gap-4 justify-center items-center py-6 text-gray-600 text-sm">
-                            <img src="../../public/person-sitting.png" width={200}/>
+                            <img src="/Story-Website/person-sitting.png" width={200}/>
                             <p>it seems there is no result for you search ,👀</p>
                         </div>
                     }

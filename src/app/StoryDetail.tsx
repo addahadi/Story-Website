@@ -92,7 +92,7 @@ const StoryDetail = () => {
     <div>
       <div className="flex flex-row w-full h-fit absolute left-0">
         <div className=" flex justify-center items-center max-xl:hidden">
-          <img src="../public/writeS.webp" width={500} className="h-full" />
+          <img src="/Story-Website/writeS.webp" width={500} className="h-full" />
         </div>
         <div className=" flex-1 pt-5 px-4 h-full   w-2/5 relative">
           <div className=" pb-5 border-orange-1 border-b-[6px] w-fit">

@@ -95,7 +95,7 @@ const RecommendedCom = ({
               const { title } = value;
               const truncatedStr =
                 title.length > 30 ? title.slice(0, 30) + "..." : title;
-              return <StoryCard key={value.id} items={value} truncatedStr={truncatedStr} />;
+              return <StoryCard key={value.id} items={value} truncatedStr={truncatedStr}  searchItem={false}/>;
             })}
         </CarouselContent>
         <CarouselPrevious className=" max-lg:hidden"/>

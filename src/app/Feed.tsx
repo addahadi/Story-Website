@@ -11,8 +11,7 @@ const Feed = () => {
         </div>
         <div className=" max-w-[1000px] w-full  mx-auto flex flex-col gap-20 px-4 ">
             <Banner Category="adventure" />
-            <Banner Category="fantasy"/>
-            <Banner Category="romance"/>
+            <Banner Category="comedy"/>
         </div>
 
     </div>

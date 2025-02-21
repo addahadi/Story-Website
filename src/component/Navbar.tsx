@@ -50,7 +50,7 @@ const Navbar = () => {
         <div className=" sticky left-0 top-0 p-5 flex pt-4 pb-4 items-center border-b-2 z-20 bg-white-1 border-white-3 justify-between  w-full">
             <div className=" flex flex-row items-center md:gap-4 max-md:gap-1">
                 <Link to="/" className="flex flex-row items-center gap-3 pr-6 max-sm:pr-3 border-r-2 border-white-3">
-                    <img src="../public/logo.svg" width={35}/>
+                    <img src="/Story-Website/logo.svg" width={35}/>
                     <h1 className=" text-lg text-black-2 max-sm:hidden">dz-story</h1>
                 </Link>
                 <div onClick={() => navigate("/browse")} className="  cursor-pointer text-black-2 p-2 hover:bg-orange-2 rounded-lg transition-colors">
@@ -83,7 +83,7 @@ const Navbar = () => {
                         setOptWrite(!optWrite);
                     }}
                 >
-                    <img src="../public/write.svg" width={30} />
+                    <img src="/Story-Website/write.svg" width={30} />
                     <h1 className=" text-black-2">Write</h1>
                     <Popup open={optWrite}>
                         <ul className="flex flex-col gap-3 text-black-1 ">
@@ -97,7 +97,7 @@ const Navbar = () => {
                             <li
                                 className=" cursor-not-allowed w-max hover:text-white-2 flex gap-2"
                             >
-                                <img src="../public/lock.svg" width={20}/>
+                                <img src="/Story-Website/lock.svg" width={20}/>
                                 <span>Generate Story</span>
                             </li>
                         </ul>
@@ -109,7 +109,7 @@ const Navbar = () => {
                     className="relative cursor-pointer flex h-fit items-center gap-3 border rounded-full sm:pr-3 border-black-2"
                 >
                     <img
-                        src={currentUser?.photoURL ? currentUser?.photoURL : "../../public/user.svg"}
+                        src={currentUser?.photoURL ? currentUser?.photoURL : "/Story-Website/user.svg"}
                         width={30}
                         className=" rounded-full"
                     />
@@ -125,7 +125,7 @@ const Navbar = () => {
                                 className="border-b-2
                     hover:text-white-2 cursor-pointer border-orange-1 pb-3 flex gap-2"
                             >
-                                <img src="../public/profile.svg"  width={15}/>
+                                <img src="/Story-Website/profile.svg"  width={15}/>
                                 <span>Profile</span>
                             </li>
                             <li

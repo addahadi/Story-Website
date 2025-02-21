@@ -12,7 +12,7 @@ const Register = () => {
     <div className=" w-full  h-screen bg-orange-2">
       <header className="w-full px-5 py-3 border-b border-white-2 ">
         <ul className=" w-full flex flex-row justify-between items-center">
-          <img  src="../public/logo.svg" width={35}/>
+          <img  src="/Story-Website/logo.svg" width={35}/>
           <p  className="text-black-2 cursor-pointer font-semibold hover:text-white-2" onClick={() => {setIsopen(true) ; setIsLogin(true)}}>LogIn</p>
         </ul>
       </header>
@@ -32,7 +32,7 @@ const Register = () => {
             </Button>
           </section>
           <section className=" max-lg:hidden">
-            <img src="../../public/flipped_image.png" width={600}/>
+            <img src="/Story-Website/flipped_image.png" width={600}/>
           </section>
         </div>
       </main>

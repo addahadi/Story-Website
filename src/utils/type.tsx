@@ -27,6 +27,7 @@ export interface UploadDetailsProp extends UserContextType {
 }
 
 
+
 export interface StoryContextType {
   isDialog: boolean;
   setIsDialog: React.Dispatch<React.SetStateAction<boolean>>;

@@ -84,7 +84,6 @@ const StoryBanner = ({ Data, length, Parts }: StoryPanelProp) => {
           variant: "destructive",
         });
       } else {
-        // Like
         await likesRef.doc(uid).set({ likedAt: new Date() });
         await db
           .collection("WrittenStories")

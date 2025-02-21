@@ -3,12 +3,12 @@ import { attributesProps } from "./type";
 
 export const StoryCategory = [
   {
-    img: "../public/write.jpg",
+    img: "/Story-Website/write.jpg",
     text: "Generate a Story",
 
   },
   {
-    img: "../public/aiwrite.jpg",
+    img: "/Story-Website/aiwrite.jpg",
     text: "Write a Story",
   },
 ];
@@ -16,23 +16,23 @@ export const StoryCategory = [
 export const RichStyle = [
   {
     Style: "BOLD",
-    icon: "../public/RichStyle/bold.svg",
+    icon: "/Story-Website/RichStyle/bold.svg",
   },
   {
     Style: "ITALIC",
-    icon: "../public/RichStyle/italic.svg",
+    icon: "/Story-Website/RichStyle/italic.svg",
   },
   {
     Style: "UNDERLINE",
-    icon: "../public/RichStyle/underline.svg",
+    icon: "/Story-Website/RichStyle/underline.svg",
   },
   {
     Style: "STRIKETHROUGH",
-    icon: "../public/RichStyle/strike.svg",
+    icon: "/Story-Website/RichStyle/strike.svg",
   },
   {
     Style: "CODE",
-    icon: "../public/RichStyle/code.svg",
+    icon: "/Story-Website/RichStyle/code.svg",
   },
 ];
 
@@ -61,11 +61,11 @@ export const StoryProp = [
 export const ProfileAttributes = [
   {
     title: "Posts",
-    img: "../../public/list.svg",
+    img: "/Story-Website/list.svg",
   },
   {
     title: "Followers",
-    img: "../../public/people.svg",
+    img: "/Story-Website/people.svg",
   },
 ];
 
@@ -74,38 +74,38 @@ export const ProfileAttributes = [
 export const StoryAttributes = [
   {
     title: "Likes",
-    img: "../public/heart.svg",
+    img: "/Story-Website/heart.svg",
   },
   {
     title: "Parts",
-    img: "../public/list.svg",
+    img: "/Story-Website/list.svg",
   },
 ];
 
 
 export const cards = [
   {
-    pic: "../public/draw.svg",
+    pic: "/Story-Website/draw.svg",
     title: "hi how are ",
   },
   {
-    pic: "../public/draw1.svg",
+    pic: "/Story-Website/draw1.svg",
     title: "hi how are ",
   },
   {
-    pic: "../public/draw2.svg",
+    pic: "/Story-Website/draw2.svg",
     title: "hi how are ",
   },
   {
-    pic: "../public/draw3.svg",
+    pic: "/Story-Website/draw3.svg",
     title: "hi how are ",
   },
   {
-    pic: "../public/draw3.svg",
+    pic: "/Story-Website/draw3.svg",
     title: "hi how are ",
   },
   {
-    pic: "../public/draw3.svg",
+    pic: "/Story-Website/draw3.svg",
     title: "hi how are ",
   },
 ];

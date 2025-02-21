@@ -44,7 +44,7 @@ const NotificationComp = ({
             Notification
           </div>
           <div className="py-2 cursor-pointer" onClick={() => MarkAllAsRead(currentUser)}>
-            <img src="../public/delete.svg"  width={20}/>
+            <img src="/Story-Website/delete.svg"  width={20}/>
           </div>
         </DialogTitle>
         <DialogDescription className=" p-3 w-[450px] max-md:w-[350px] max-sm:w-[300px] ">

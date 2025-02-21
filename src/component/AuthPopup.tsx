@@ -44,8 +44,9 @@ const AuthPopup = ({isLogin , setIsLogin , setIsopen , isopen} : AuthPopupProps)
                 await createUserWithEmailAndPassword(Auth, email, password);
                 navigate("/")
             }
-        } catch (err : unknown) {
-            setError(err.message as string);
+        } catch (err) {
+            const str : Record<string , string> = err as Record<string , string>
+            setError(str.message);
         }
         setLoading(false);
     };

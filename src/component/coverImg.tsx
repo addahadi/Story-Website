@@ -1,7 +1,10 @@
 import { Button } from "@/component/ui/button";
 import { ApiController } from "@/utils/CloudConfig";
-// import { uploadImg } from "@/utils/CloudConfig";
+
 import React, { useRef, useState} from "react";
+// @ts-ignore
+import Loading from "react-simple-loading";
+
 
 
 
@@ -9,16 +12,19 @@ import React, { useRef, useState} from "react";
 const CoverImageUpload = ({setImgUrl} : {setImgUrl:React.Dispatch<React.SetStateAction<string>>}) => {
   const InputRef = useRef<HTMLInputElement | null>(null);
   const [img , setImg] = useState('')
+  const [loading , setLoading] = useState(false);
 
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
+       setLoading(true);
       const formData = new FormData();
       const imageUrl = URL.createObjectURL(file);
       setImg(imageUrl)
       formData.append('file',file);
       const result = await ApiController().UploadImg(formData)
       setImgUrl(result.url);
+      setLoading(false);
     }
   };
 
@@ -36,7 +42,9 @@ const CoverImageUpload = ({setImgUrl} : {setImgUrl:React.Dispatch<React.SetState
         onChange={handleImageChange}
       />
       <div className=" flex gap-2 items-center border-2 w-fit p-1 rounded-lg">
-        <Button className=" rounded-md bg-orange-1 text-white-1" onClick={() => InputRef.current?.click()}>Upload img</Button>
+        <Button className=" rounded-md bg-orange-1 text-white-1" onClick={() => InputRef.current?.click()}>
+            {!loading ? <span>Upload img</span> : <Loading size="18px"/>}
+        </Button>
         <span className=" text-black-2 font-semibold text-lg">{img}</span>
       </div>
     </div>

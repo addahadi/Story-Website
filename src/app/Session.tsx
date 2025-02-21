@@ -96,7 +96,7 @@ const Sessions = () => {
       <header className=" m-auto max-w-[1400px] px-5">
         <div className=" py-4 flex">
           <div className=" flex flex-row gap-3 flex-1">
-              <img src="../public/logo.svg" width={40} height={40} />
+              <img src="/Story-Website/logo.svg" width={40} height={40} />
             <div className="flex flex-col ">
               <h1 className=" text-lg">{title as number}</h1>
               <div
@@ -113,7 +113,7 @@ const Sessions = () => {
           <div className="flex flex-row-reverse gap-3">
             <div>
               <img
-                src={currentUser?.photoURL ? currentUser?.photoURL : ""}
+                src={currentUser?.photoURL ? currentUser?.photoURL : "/Story-Website/user.svg"}
                 className=" rounded-full w-[40px]"
               />
             </div>
