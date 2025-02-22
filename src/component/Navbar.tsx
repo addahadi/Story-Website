@@ -12,7 +12,7 @@ import useAuthor from "@/hooks/useAuthor.tsx";
 
 const Navbar = () => {
     const { currentUser } = useUser();
-    const { author } = useAuthor(currentUser?.uid ? currentUser.uid : "");
+    const { Img  , ListenToImgChanges } = useAuthor(currentUser?.uid ? currentUser.uid : "");
     const [optOpen, setOptOpen] = useState<boolean>(false);
     const [optWrite, setOptWrite] = useState<boolean>(false);
     const [clicked, setClicked] = useState<boolean>(false);
@@ -47,6 +47,15 @@ const Navbar = () => {
         const unsubscribe = UnReadNotifcation(currentUser, setUnRead);
         return () => unsubscribe();
     }, [currentUser]);
+
+
+    useEffect(() => {
+        const unsubscribe = ListenToImgChanges()
+        return () => unsubscribe()
+    },[ListenToImgChanges])
+
+
+
 
     return (
         <div className=" sticky left-0 top-0 p-5 flex pt-4 pb-4 items-center border-b-2 z-20 bg-white-1 border-white-3 justify-between  w-full">
@@ -110,11 +119,13 @@ const Navbar = () => {
                     onClick={() => setOptOpen(!optOpen)}
                     className="relative cursor-pointer flex h-fit items-center gap-3 border rounded-full sm:pr-3 border-black-2"
                 >
-                    <img
-                        src={author?.PhotoUrl ? author.PhotoUrl : "/Story-Website/user.svg"}
-                        width={30}
-                        className=" rounded-full"
-                    />
+                    <div className=" w-[30px] h-[30px] overflow-hidden rounded-full">
+                        <img
+                            src={Img ? Img : "/Story-Website/user.svg"}
+
+                            className=" w-full h-full object-cover"
+                        />
+                    </div>
                     <h1 className=" max-sm:hidden">{currentUser?.email?.split("@")[0]}</h1>
                     <Popup open={optOpen}>
                         <ul className="flex flex-col gap-3 text-black-1 ">

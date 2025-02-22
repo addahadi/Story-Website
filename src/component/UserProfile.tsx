@@ -8,10 +8,12 @@ import {ApiController} from "@/utils/CloudConfig.tsx";
 import Loading from "react-simple-loading";
 import useAuthor from "@/hooks/useAuthor.tsx";
 import {toast} from "@/hooks/use-toast.ts";
+import {useUser} from "@/context/UserCon.tsx";
 
 const UserProfile = ({profileId,  Data , FollowersCount} : {profileId : string | undefined , Data : DocumentData | undefined, FollowersCount : number}) => {
     const InputRef = useRef<HTMLInputElement>(null)
     const [loading ,setLoading] = useState(false)
+    const {currentUser} = useUser();
     const {Img,ListenToImgChanges} = useAuthor(profileId ? profileId  : "")
     async function handleImg(event : React.ChangeEvent<HTMLInputElement> ){
        try {
@@ -43,18 +45,23 @@ const UserProfile = ({profileId,  Data , FollowersCount} : {profileId : string |
                 onChange={handleImg}
             />
             <div className="relative w-fit">
-                <div className="absolute top-0 right-0 cursor-pointer" onClick={() => InputRef.current?.click()}>
-                    {!loading ?
-                        (<img src="/Story-Website/camera.svg" alt="google" width={30}/>)
-                    : (<Loading size={"18px"} />)
-                    }
-                </div>
+                { currentUser?.uid == profileId &&
+                    <div className="absolute top-0 right-0 cursor-pointer" onClick={() => InputRef.current?.click()}>
+                        {!loading ?
+                            (<div className="bg-orange-2 border-4 border-white-1 w-fit h-fit rounded-full">
+                                    <img src="/Story-Website/camera.svg" alt="google" width={30}/>
+                                </div>
+                            )
+                            : (<Loading size={"18px"} />)}
+                    </div>}
                 {
                     Img?
-                        (<img
-                            src={Img} width={120}
-                            className="rounded-full lg:width-[80px] max-lg:width-[100px] max-md:width-[80px]"
-                        />)
+                        (<div className=" w-[130px] h-[130px] overflow-hidden rounded-full">
+                                <img
+                                    src={Img}
+                                    className=" w-full h-full object-center"
+                                />
+                            </div>)
                         :
                         (
                             <img
