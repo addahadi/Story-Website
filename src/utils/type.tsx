@@ -40,6 +40,7 @@ export interface StoryCon extends StoryContextType  {
   partId : string
 }
 
+
 export interface PanelProp {
   data: number;
   title: string;

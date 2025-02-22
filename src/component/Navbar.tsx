@@ -8,9 +8,11 @@ import { Auth } from "@/utils/FirebaseConfig";
 import { Icon } from "./ui/Icon.tsx";
 import { ListenToNotification, UnReadNotifcation } from "@/utils/Notification";
 import NotificationComp from "./NotificationComp";
+import useAuthor from "@/hooks/useAuthor.tsx";
 
 const Navbar = () => {
     const { currentUser } = useUser();
+    const { author } = useAuthor(currentUser?.uid ? currentUser.uid : "");
     const [optOpen, setOptOpen] = useState<boolean>(false);
     const [optWrite, setOptWrite] = useState<boolean>(false);
     const [clicked, setClicked] = useState<boolean>(false);
@@ -109,7 +111,7 @@ const Navbar = () => {
                     className="relative cursor-pointer flex h-fit items-center gap-3 border rounded-full sm:pr-3 border-black-2"
                 >
                     <img
-                        src={currentUser?.photoURL ? currentUser?.photoURL : "/Story-Website/user.svg"}
+                        src={author?.PhotoUrl ? author.PhotoUrl : "/Story-Website/user.svg"}
                         width={30}
                         className=" rounded-full"
                     />

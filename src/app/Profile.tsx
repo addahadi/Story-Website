@@ -7,7 +7,7 @@ import cn from "classnames";
 import { Button } from "@/component/ui/button.tsx";
 import { useUser } from "@/context/UserCon.tsx";
 import useFollow from "@/hooks/useFollow.tsx";
-import { ListenToFollowers } from "@/utils/Follow";
+import { ListenToFollowers } from "@/utils/Follow.tsx";
 import { Toaster } from "@/component/ui/toaster";
 import {motion} from "framer-motion";
 import UserProfile from "@/component/UserProfile.tsx";
@@ -70,7 +70,7 @@ const Profile = () => {
           </div>
         </div>
         <div className=" lg:hidden">
-          <UserProfile Data={Data} FollowersCount={FollowersCount} />
+          <UserProfile profileId={profileId} Data={Data} FollowersCount={FollowersCount} />
           <div className="flex mt-8  items-center w-full">
               {currentUser?.uid != profileId && (
                   <Button
@@ -117,7 +117,7 @@ const Profile = () => {
       <div className="flex flex-row p-6 gap-4">
         <Outlet />
         <div className=" p-4 max-lg:hidden w-[30%] border-l border-black-2">
-          <UserProfile  Data={Data} FollowersCount={FollowersCount}/>
+          <UserProfile profileId={profileId} Data={Data} FollowersCount={FollowersCount}/>
         </div>
       </div>
       <Toaster />

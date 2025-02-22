@@ -1,5 +1,5 @@
 import { db } from "./FirebaseConfig";
-import { getFollower } from "./Follow";
+import { getFollower } from "./Follow.tsx";
 import { UserType } from "./type";
 import firebase from "firebase/compat/app";
 import Timestamp = firebase.firestore.Timestamp;
