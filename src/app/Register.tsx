@@ -6,6 +6,10 @@ import { SplitText } from "gsap/SplitText";
 import { Button } from "@/component/ui/button";
 import { BatteryChargingIcon } from "lucide-react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import HowItWork from "@/component/HowItWork";
+import FinalCTA from "@/component/FinalCta";
+import Footer from "@/component/Footer";
+import { HashLink } from "react-router-hash-link";
 
 gsap.registerPlugin(SplitText)
 gsap.registerPlugin(ScrollTrigger)
@@ -55,28 +59,13 @@ const Register = () => {
         })
       };
 
-      const circle = gsap.from(".circle" , {
-        ease: "back.inOut",
-        repeat:-1,
-        yoyo:true,
-        duration:2,
-        y:400, 
-        x:100
-      })
-      const rectangle = gsap.from(".rectangle", {
-        ease: "back.inOut",
-        repeat: -1,
-        yoyo: true,
-        rotate:"100%",
-        duration: 2,
-        x: -400,
-      });
       const featureAnimations = gsap.utils
         .toArray(".feature-text")
         .map((el : any, i) => {
           return gsap.from(el, {
             scrollTrigger: {
               trigger: el,
+              toggleActions: "play none none reverse",
               start: "top 80%", // when element enters viewport
             },
             x: i % 2 === 0 ? -100 : 100, // alternate left/right
@@ -96,44 +85,72 @@ const Register = () => {
         clearInterval(interval);
         if (split) split.revert();
         if(featureAnimations) featureAnimations.map((anim : any) => anim.kill());
-        if(circle) circle.kill()
-        if(rectangle) rectangle.kill()
+
       };
     }, []);
 
     return (
       <div className=" w-full  h-screen bg-white-1">
-        <header className=" max-w-[1200px] m-auto pt-8 flex justify-between">
+        <header className="max-w-[1200px] mx-auto pt-6 px-4 flex justify-between items-center">
+          {/* Logo */}
           <div className="flex flex-row gap-2 items-center">
-            <img src="/Story-Website/logo.svg" width={50} height={50} />
-            <h1 className="text-2xl font-bold text-black-2">Story Teller</h1>
+            <img src="/Story-Website/logo.svg" width={40} height={40} />
+            <h1 className="text-xl sm:text-2xl font-bold text-black-2">
+              Story Teller
+            </h1>
           </div>
-          <div
-            className=" flex flex-row gap-6 text-gray-800 items-center
-          font-semibold 
-          
-          "
+
+          {/* Nav (hidden on mobile, visible on md+) */}
+          <nav className="hidden md:flex flex-row gap-6 text-gray-800 items-center font-semibold">
+            <span className="hover:underline cursor-pointer">
+              <HashLink smooth to="#how-it-works" className="no-underline">
+                How it works
+              </HashLink>
+            </span>
+
+            <span className="hover:underline cursor-pointer">
+              <HashLink smooth to="#features" className="no-underline">
+                Features
+              </HashLink>
+            </span>
+
+            <span className="hover:underline cursor-pointer">
+              <HashLink smooth to="#faq" className="no-underline">
+                FAQ
+              </HashLink>
+            </span>
+          </nav>
+
+          {/* CTA Button */}
+          <Button
+            onClick={() => {
+              setIsopen(true);
+              setIsLogin(false);
+            }}
+            className="bg-orange-1 flex flex-row items-center gap-1 px-3 py-2 rounded-md"
           >
-            <span className="hover:underline cursor-pointer">About Us</span>
-            <span className="hover:underline cursor-pointer">Features</span>
-            <span className="hover:underline cursor-pointer">Contact</span>
-          </div>
-          <Button className=" bg-orange-1 flex flex-row items-center">
-            <BatteryChargingIcon className="  size-4" />
-            <span className="text-white">Get Started</span>
+            <BatteryChargingIcon className="size-4" />
+            <span className="text-white text-sm sm:text-base">Get Started</span>
           </Button>
         </header>
-        <main className="min-h-screen  m-auto w-[800px] flex justify-center items-center flex-col">
+
+        <main className="min-h-screen mx-auto w-full max-w-[800px] flex justify-center items-center flex-col px-4">
           <div>
-            <img src="/Story-Website/logo.svg" width={200} height={400} />
+            <img
+              src="/Story-Website/logo.svg"
+              width={160}
+              height={160}
+              className="mx-auto"
+            />
           </div>
-          <div className=" mt-12 flex flex-col items-center">
-            <h1 className=" paragraph w-full  leading-relaxed text-5xl font-bold text-black-2 text-center ">
+          <div className="mt-8 sm:mt-12 flex flex-col items-center">
+            <h1 className="paragraph w-full leading-relaxed text-3xl sm:text-5xl font-bold text-black-2 text-center">
               Story Teller AI-Powered Storytelling Platform
             </h1>
           </div>
         </main>
-        <section className="py-20 bg-gray-50 dark:bg-gray-900">
+
+        <section id="features" className="py-20 bg-purple-300 ">
           <div className="  max-w-6xl mx-auto px-6 space-y-20">
             <div className=" feature-text grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div>
@@ -196,65 +213,11 @@ const Register = () => {
             </div>
           </div>
         </section>
-        <section className=" bg-purple-300">
-          <div className="  rounded-full w-24 h-24 bg-orange-1 circle"></div>
-          <div className="py-20 ">
-            <div className="max-w-6xl mx-auto px-6 text-center">
-              <h2 className="text-3xl font-bold text-gray-50 dark:text-gray-100 mb-12">
-                How It Works
-              </h2>
 
-              <div className="  grid grid-cols-1 md:grid-cols-3 gap-12">
-                {/* Step 1 */}
-                <div className="bg-white-1 p-4 rounded-xl  how-step flex flex-col items-center">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 text-2xl font-bold mb-4">
-                    1
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-                    Enter Your Idea
-                  </h3>
-                  <p className="mt-2 text-gray-600 dark:text-gray-400">
-                    Start with a simple prompt — a theme, topic, or character
-                    you want to write about.
-                  </p>
-                </div>
-
-                {/* Step 2 */}
-                <div className="bg-white-1 p-4 rounded-xl  how-step flex flex-col items-center">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 text-2xl font-bold mb-4">
-                    2
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-                    AI Generates Your Story
-                  </h3>
-                  <p className="mt-2 text-gray-600 dark:text-gray-400">
-                    Our AI instantly crafts a story draft with engaging
-                    characters and plots.
-                  </p>
-                </div>
-
-                {/* Step 3 */}
-                <div className="bg-white-1 p-4 rounded-xl  how-step flex flex-col items-center">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 text-2xl font-bold mb-4">
-                    3
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-                    Customize & Publish
-                  </h3>
-                  <p className="mt-2 text-gray-600 dark:text-gray-400">
-                    Refine the tone, style, and details — then share your story
-                    with the world.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex w-full flex-row-reverse">
-            <div className=" mr-16 rounded-lg w-28 h-28 bg-orange-1 rectangle"></div>
-
-          </div>
-        </section>
-
+        <HowItWork />
+        <FinalCTA setOpen={setIsopen} />
+        <div className=" w-full -mt-1 bg-gradient-to-b  from-purple-300 to-gray-800   h-20  "></div>
+        <Footer />
         <AuthPopup
           isopen={isopen}
           setIsLogin={setIsLogin}
