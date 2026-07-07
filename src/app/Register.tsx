@@ -93,7 +93,7 @@ const Register = () => {
         <header className="max-w-[1200px] mx-auto pt-6 px-4 flex justify-between items-center">
           {/* Logo */}
           <div className="flex flex-row gap-2 items-center">
-            <img src="/Story-Website/logo.svg" width={40} height={40} />
+            <img src="/logo.svg" width={40} height={40} />
             <h1 className="text-xl sm:text-2xl font-bold text-black-2">
               Story Teller
             </h1>
@@ -136,7 +136,7 @@ const Register = () => {
         <main className="min-h-screen mx-auto w-full max-w-[800px] flex justify-center items-center flex-col px-4">
           <div>
             <img
-              src="/Story-Website/logo.svg"
+              src="/logo.svg"
               width={160}
               height={160}
               className="mx-auto"

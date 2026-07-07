@@ -9,7 +9,7 @@ import {
 
 /* ── brand ── */
 const BRAND = "dz-story";
-const LOGO = "/Story-Website/logo.svg"; // matches Navbar + Vite base path
+const LOGO = "/logo.svg"; // matches Navbar + Vite base path
 
 /* ── motion helpers (respect reduced-motion; declared per-component) ── */
 const rise: Variants = {

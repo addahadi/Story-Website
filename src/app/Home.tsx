@@ -40,7 +40,7 @@ const Home = () => {
                                 <h1 className="text-2xl text-black-2">Who I am</h1>
                                 {currentUser?.uid == profileId && (
                                     <div onClick={handleEdit} className="p-2 flex items-center  cursor-pointer transition-colors border border-white-1 justify-center w-fit rounded-full hover:bg-orange-2 hover:border hover:border-orange-1">
-                                        <img src="/Story-Website/edit.svg" width={20}/>
+                                        <img src="/edit.svg" width={20}/>
                                     </div>
 
                                 )}
@@ -67,7 +67,7 @@ const Home = () => {
                     </div>
                 ) : (
                     <div className="flex flex-col gap-4 justify-center items-center py-6 text-gray-600 text-sm">
-                        <img src="/Story-Website/person-sitting.png" width={150} />
+                        <img src="/person-sitting.png" width={150} />
                         <p>Mysterious user detected! Maybe they'll reveal more soon. 👀</p>
                     </div>
                 ))}

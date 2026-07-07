@@ -49,7 +49,7 @@ const UserProfile = ({profileId,  Data , FollowersCount} : {profileId : string |
                     <div className="absolute top-0 right-0 cursor-pointer" onClick={() => InputRef.current?.click()}>
                         {!loading ?
                             (<div className="bg-orange-2 border-4 border-white-1 w-fit h-fit rounded-full">
-                                    <img src="/Story-Website/camera.svg" alt="google" width={30}/>
+                                    <img src="/camera.svg" alt="google" width={30}/>
                                 </div>
                             )
                             : (<Loading size={"18px"} />)}
@@ -65,7 +65,7 @@ const UserProfile = ({profileId,  Data , FollowersCount} : {profileId : string |
                         :
                         (
                             <img
-                                src="/Story-Website/user.svg" width={120}
+                                src="/user.svg" width={120}
                                 className="rounded-full lg:width-[40px] max-lg:width-[60px] max-md:width-[50px]"
                             />
                         )

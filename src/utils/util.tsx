@@ -4,12 +4,12 @@ import { attributesProps } from "./type";
 
 export const StoryCategory = [
   {
-    img: "/Story-Website/write.jpg",
+    img: "/write.jpg",
     text: "Generate a Story",
 
   },
   {
-    img: "/Story-Website/aiwrite.jpg",
+    img: "/aiwrite.jpg",
     text: "Write a Story",
   },
 ];
@@ -17,23 +17,23 @@ export const StoryCategory = [
 export const RichStyle = [
   {
     Style: "BOLD",
-    icon: "/Story-Website/RichStyle/bold.svg",
+    icon: "/RichStyle/bold.svg",
   },
   {
     Style: "ITALIC",
-    icon: "/Story-Website/RichStyle/italic.svg",
+    icon: "/RichStyle/italic.svg",
   },
   {
     Style: "UNDERLINE",
-    icon: "/Story-Website/RichStyle/underline.svg",
+    icon: "/RichStyle/underline.svg",
   },
   {
     Style: "STRIKETHROUGH",
-    icon: "/Story-Website/RichStyle/strike.svg",
+    icon: "/RichStyle/strike.svg",
   },
   {
     Style: "CODE",
-    icon: "/Story-Website/RichStyle/code.svg",
+    icon: "/RichStyle/code.svg",
   },
 ];
 
@@ -62,11 +62,11 @@ export const StoryProp = [
 export const ProfileAttributes = [
   {
     title: "Posts",
-    img: "/Story-Website/list.svg",
+    img: "/list.svg",
   },
   {
     title: "Followers",
-    img: "/Story-Website/people.svg",
+    img: "/people.svg",
   },
 ];
 
@@ -75,38 +75,38 @@ export const ProfileAttributes = [
 export const StoryAttributes = [
   {
     title: "Likes",
-    img: "/Story-Website/heart.svg",
+    img: "/heart.svg",
   },
   {
     title: "Parts",
-    img: "/Story-Website/list.svg",
+    img: "/list.svg",
   },
 ];
 
 
 export const cards = [
   {
-    pic: "/Story-Website/draw.svg",
+    pic: "/draw.svg",
     title: "hi how are ",
   },
   {
-    pic: "/Story-Website/draw1.svg",
+    pic: "/draw1.svg",
     title: "hi how are ",
   },
   {
-    pic: "/Story-Website/draw2.svg",
+    pic: "/draw2.svg",
     title: "hi how are ",
   },
   {
-    pic: "/Story-Website/draw3.svg",
+    pic: "/draw3.svg",
     title: "hi how are ",
   },
   {
-    pic: "/Story-Website/draw3.svg",
+    pic: "/draw3.svg",
     title: "hi how are ",
   },
   {
-    pic: "/Story-Website/draw3.svg",
+    pic: "/draw3.svg",
     title: "hi how are ",
   },
 ];
