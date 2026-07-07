@@ -9,6 +9,7 @@ export type UserType = User | null
 
 export interface UserContextType{
     currentUser : UserType
+    authReady? : boolean
 }
 
 

@@ -7,11 +7,13 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserType>(null);
+  const [authReady, setAuthReady] = useState(false);
 
   useEffect(() => {
     const unsubscribe = Auth.onAuthStateChanged(async (user) => {
       if (user) {
         setCurrentUser(user);
+        setAuthReady(true);
         const Id = user.uid;
         const DocField = await db.collection("user").doc(Id).get();
         if (!DocField.exists) {
@@ -28,13 +30,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         }
       } else {
         setCurrentUser(null);
+        setAuthReady(true);
       }
     });
     return () => unsubscribe();
   }, [currentUser]);
 
   return (
-    <UserContext.Provider value={{ currentUser }}>
+    <UserContext.Provider value={{ currentUser, authReady }}>
       {children}
     </UserContext.Provider>
   );
