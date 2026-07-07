@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Button } from "@/component/ui/button";
@@ -6,6 +6,7 @@ import {
   Sparkles, PenLine, BookOpen, Users, Share2, Wand2,
   ArrowRight, Quote, Feather, Github, Twitter, Mail,
 } from "lucide-react";
+import AuthPopup from "@/component/AuthPopup.tsx";
 
 /* ── brand ── */
 const BRAND = "dz-story";
@@ -53,6 +54,18 @@ const STEPS = [
 const Landing = () => {
   const reduce = useReducedMotion();
   const marqueeRef = useRef<HTMLDivElement>(null);
+  const [isopen, setIsopen] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const openSignIn = () => {
+    setIsLogin(true);
+    setIsopen(true);
+  };
+
+  const openSignUp = () => {
+    setIsLogin(false);
+    setIsopen(true);
+  };
 
   // When reduced-motion is on, reveals appear immediately (no transform).
   const revealProps = reduce
@@ -81,11 +94,11 @@ const Landing = () => {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm" className="text-black-2 hover:bg-orange-2">
-              <Link to="/signin">Sign in</Link>
+            <Button variant="ghost" size="sm" className="text-black-2 hover:bg-orange-2" onClick={openSignIn}>
+              Sign in
             </Button>
-            <Button asChild size="sm" className="bg-orange-1 text-white-1 hover:bg-orange-1/90">
-              <Link to="/signin">Start writing</Link>
+            <Button size="sm" className="bg-orange-1 text-white-1 hover:bg-orange-1/90" onClick={openSignUp}>
+              Start writing
             </Button>
           </div>
         </div>
@@ -117,8 +130,8 @@ const Landing = () => {
               and share it with readers who love the same worlds you do.
             </motion.p>
             <motion.div variants={reduce ? undefined : rise} className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-orange-1 text-white-1 hover:bg-orange-1/90">
-                <Link to="/signin">Start writing free <ArrowRight className="h-4 w-4" /></Link>
+              <Button size="lg" className="bg-orange-1 text-white-1 hover:bg-orange-1/90" onClick={openSignUp}>
+                Start writing free <ArrowRight className="h-4 w-4" />
               </Button>
               <Button asChild size="lg" variant="outline" className="border-black-2/15 bg-transparent hover:bg-white-1">
                 <Link to="/browse">Browse stories</Link>
@@ -217,7 +230,7 @@ const Landing = () => {
         <motion.div {...revealProps}>
           <Quote className="mx-auto h-8 w-8 text-orange-1/50" />
           <p className="mt-6 font-display text-3xl font-medium leading-snug text-black-1 md:text-4xl">
-            “Everyone has a story in them. {BRAND} just hands you the pen — and helps you fill the first page.”
+            "Everyone has a story in them. {BRAND} just hands you the pen — and helps you fill the first page."
           </p>
         </motion.div>
       </section>
@@ -237,8 +250,8 @@ const Landing = () => {
               Your imagination, a finished draft in minutes, and readers waiting to turn the page.
             </p>
             <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-orange-1 text-white-1 hover:bg-orange-1/90">
-                <Link to="/signin">Get started for free <ArrowRight className="h-4 w-4" /></Link>
+              <Button size="lg" className="bg-orange-1 text-white-1 hover:bg-orange-1/90" onClick={openSignUp}>
+                Get started for free <ArrowRight className="h-4 w-4" />
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white-1/25 bg-transparent text-white-1 hover:bg-white-1/10 hover:text-white-1">
                 <Link to="/browse">Read a story first</Link>
@@ -286,6 +299,14 @@ const Landing = () => {
           © {new Date().getFullYear()} {BRAND}. Written with imagination.
         </div>
       </footer>
+
+      {/* ─────────── Auth Popup ─────────── */}
+      <AuthPopup
+        isopen={isopen}
+        setIsopen={setIsopen}
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+      />
     </div>
   );
 };
