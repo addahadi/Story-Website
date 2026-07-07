@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HowItWork = () => {
   useEffect(() => {
-    gsap.utils.toArray(".timeline-step").forEach((el: any, i) => {
+    gsap.utils.toArray(".timeline-step").forEach((el: any, _i) => {
       gsap.set(el, { autoAlpha: 0, y: 100 });
 
       gsap.to(el, {

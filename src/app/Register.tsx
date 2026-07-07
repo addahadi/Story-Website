@@ -19,7 +19,6 @@ const Register = () => {
 
     useEffect(() => {
       let split : SplitText | null = null;
-      let featureAnimation : gsap.core.Tween | null = null;
       const runHeroAnimation = async () => {
         // revert previous split before creating a new one
         if (split) split.revert();
@@ -48,7 +47,7 @@ const Register = () => {
           if (Math.random() < 0.3) {
             word.classList.add("underlineWords");
           } else {
-            word.style.border = "none";
+            (word as HTMLElement).style.border = "none";
           }
         });
 
